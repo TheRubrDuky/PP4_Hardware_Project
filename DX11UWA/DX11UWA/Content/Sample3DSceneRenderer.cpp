@@ -236,6 +236,7 @@ void Sample3DSceneRenderer::Render(void)
 	context->PSSetShader(m_pixelShader.Get(), nullptr, 0);
 	// Draw the objects.
 	context->DrawIndexed(m_indexCount, 0, 0);
+
 }
 
 void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
@@ -331,6 +332,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 	{
 		m_loadingComplete = true;
 	});
+
 }
 
 void Sample3DSceneRenderer::ReleaseDeviceDependentResources(void)

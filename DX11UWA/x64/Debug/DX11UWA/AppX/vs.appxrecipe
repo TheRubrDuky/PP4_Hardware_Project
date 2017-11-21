@@ -36,7 +36,7 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\dr_dr\Documents\Z_Graphics 2\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.exe">
       <PackagePath>DX11UWA.exe</PackagePath>
-      <Modified>2017-11-21T20:46:19.103</Modified>
+      <Modified>2017-11-21T22:33:37.949</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\dr_dr\Documents\Z_Graphics 2\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.winmd">
       <PackagePath>DX11UWA.winmd</PackagePath>

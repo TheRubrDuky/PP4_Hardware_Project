@@ -1,0 +1,11 @@
+﻿  compilation object save succeeded; see C:\Users\dr_dr\Documents\Z_Graphics 2\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\SamplePixelShader.cso
+  compilation object save succeeded; see C:\Users\dr_dr\Documents\Z_Graphics 2\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\SampleVertexShader.cso
+  pch.cpp
+  App.cpp
+  DDSTextureLoader.cpp
+  DeviceResources.cpp
+  DX11UWAMain.cpp
+  SampleFpsTextRenderer.cpp
+  Sample3DSceneRenderer.cpp
+  DX11UWA.vcxproj -> C:\Users\dr_dr\Documents\Z_Graphics 2\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.exe
+  DX11UWA.vcxproj -> C:\Users\dr_dr\Documents\Z_Graphics 2\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.pdb (Partial PDB)

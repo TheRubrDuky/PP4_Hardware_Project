@@ -1,0 +1,12 @@
+﻿  compilation object save succeeded; see F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\1_Documentaion\Project Instructions\Step 3 - Read Getting Started With Windows Universal Apps\DX11UWA\Debug\DX11UWA\SamplePixelShader.cso
+  compilation object save succeeded; see F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\1_Documentaion\Project Instructions\Step 3 - Read Getting Started With Windows Universal Apps\DX11UWA\Debug\DX11UWA\SampleVertexShader.cso
+  pch.cpp
+  App.cpp
+  DDSTextureLoader.cpp
+  DeviceResources.cpp
+  DX11UWAMain.cpp
+  SampleFpsTextRenderer.cpp
+  Sample3DSceneRenderer.cpp
+  DX11UWA.vcxproj -> F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\1_Documentaion\Project Instructions\Step 3 - Read Getting Started With Windows Universal Apps\DX11UWA\Debug\DX11UWA\DX11UWA.exe
+  DX11UWA.vcxproj -> F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\1_Documentaion\Project Instructions\Step 3 - Read Getting Started With Windows Universal Apps\DX11UWA\Debug\DX11UWA\DX11UWA.pdb (Partial PDB)
+F:\Visual Studios\MSBuild\Microsoft\VisualStudio\v15.0\AppxPackage\Microsoft.AppXPackage.Targets(2007,5): warning APPX0108: The certificate specified has expired. For more information about renewing certificates, see http://go.microsoft.com/fwlink/?LinkID=241478.

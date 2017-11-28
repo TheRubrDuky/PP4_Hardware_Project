@@ -74,6 +74,7 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 		float radians = static_cast<float>(fmod(totalRotation, XM_2PI));
 
 		Rotate(radians);
+		Rtime = timer.GetTotalSeconds();
 	}
 
 
@@ -217,7 +218,6 @@ void Sample3DSceneRenderer::Render(void)
 
 	XMStoreFloat4x4(&m_constantBufferData.view, XMMatrixTranspose(XMMatrixInverse(nullptr, XMLoadFloat4x4(&m_camera))));
 
-
 	// Prepare the constant buffer to send it to the graphics device.
 	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
 	// Each vertex is one instance of the VertexPositionColor struct.
@@ -236,6 +236,29 @@ void Sample3DSceneRenderer::Render(void)
 	context->PSSetShader(m_pixelShader.Get(), nullptr, 0);
 	// Draw the objects.
 	context->DrawIndexed(m_indexCount, 0, 0);
+
+	//Cude Translated to the rught and not moving
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(2.0f, 0.0f, 0.0f)));
+
+	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+
+	context->DrawIndexed(m_indexCount, 0, 0);
+
+	//Pyramid translated left and rotaing on the Z axis
+	float radiansPerSecond = XMConvertToRadians(m_degreesPerSecond);
+	double totalRotation = Rtime * radiansPerSecond;
+	float radians = static_cast<float>(fmod(totalRotation, XM_2PI));
+
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose( XMMatrixMultiply( XMMatrixRotationZ(radians), XMMatrixTranslation(-2.0f, 0.0f, 0.0f))));
+
+	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+
+	context->IASetVertexBuffers(0, 1, p_vertexBuffer.GetAddressOf(), &stride, &offset);
+
+	context->IASetIndexBuffer(p_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	context->DrawIndexed(p_indexCount, 0, 0);
 
 }
 
@@ -327,12 +350,54 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&indexBufferDesc, &indexBufferData, &m_indexBuffer));
 	});
 
+	// Load mesh vertices. Each vertex has a position and a color.
+	static const VertexPositionColor PyramidVertices[] =
+	{
+		{ XMFLOAT3(0.0f, 0.5f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f) },
+		{ XMFLOAT3(-0.5f, -0.5f,  -0.5f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
+		{ XMFLOAT3(-0.5f,  -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
+		{ XMFLOAT3(0.5f,  -0.5f,  -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
+		{ XMFLOAT3(0.5f, -0.5f, 0.5f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
+	};
+
+	D3D11_SUBRESOURCE_DATA pvertexBufferData = { 0 };
+	pvertexBufferData.pSysMem = PyramidVertices;
+	pvertexBufferData.SysMemPitch = 0;
+	pvertexBufferData.SysMemSlicePitch = 0;
+	CD3D11_BUFFER_DESC pvertexBufferDesc(sizeof(PyramidVertices), D3D11_BIND_VERTEX_BUFFER);
+	DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&pvertexBufferDesc, &pvertexBufferData, &p_vertexBuffer));
+
+	// Load mesh indices. Each trio of indices represents
+	// a triangle to be rendered on the screen.
+	// For example: 0,2,1 means that the vertices with indexes
+	// 0, 2 and 1 from the vertex buffer compose the 
+	// first triangle of this mesh.
+	static const unsigned short PyramidIndices[] =
+	{
+		0,1,2, // -x
+		0,3,1,
+
+		0,4,3, // +x
+		0,2,4,
+
+		1,4,2, // -y
+		1,3,4,
+	};
+
+	p_indexCount = ARRAYSIZE(PyramidIndices);
+
+	D3D11_SUBRESOURCE_DATA pindexBufferData = { 0 };
+	pindexBufferData.pSysMem = PyramidIndices;
+	pindexBufferData.SysMemPitch = 0;
+	pindexBufferData.SysMemSlicePitch = 0;
+	CD3D11_BUFFER_DESC pindexBufferDesc(sizeof(PyramidIndices), D3D11_BIND_INDEX_BUFFER);
+	DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&pindexBufferDesc, &pindexBufferData, &p_indexBuffer));
+
 	// Once the cube is loaded, the object is ready to be rendered.
 	createCubeTask.then([this]()
 	{
 		m_loadingComplete = true;
 	});
-
 }
 
 void Sample3DSceneRenderer::ReleaseDeviceDependentResources(void)
@@ -344,4 +409,7 @@ void Sample3DSceneRenderer::ReleaseDeviceDependentResources(void)
 	m_constantBuffer.Reset();
 	m_vertexBuffer.Reset();
 	m_indexBuffer.Reset();
+
+	p_indexBuffer.Reset();
+	p_vertexBuffer.Reset();
 }

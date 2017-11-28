@@ -22,6 +22,8 @@ namespace DX11UWA
 		void StopTracking(void);
 		inline bool IsTracking(void) { return m_tracking; }
 
+		double Rtime = 0.0;
+
 		// Helper functions for keyboard and mouse input
 		void SetKeyboardButtons(const char* list);
 		void SetMousePosition(const Windows::UI::Input::PointerPoint^ pos);
@@ -48,6 +50,12 @@ namespace DX11UWA
 		ModelViewProjectionConstantBuffer	m_constantBufferData;
 		uint32	m_indexCount;
 
+		// Direct3D resources for Pyramid geometry.
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		p_vertexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		p_indexBuffer;
+
+		// System resources for Pyramid geometry.
+		uint32	p_indexCount;
 
 		// Variables used with the rendering loop.
 		bool	m_loadingComplete;

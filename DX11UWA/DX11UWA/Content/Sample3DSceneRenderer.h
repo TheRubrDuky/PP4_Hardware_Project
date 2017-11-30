@@ -1,9 +1,6 @@
 ﻿#pragma once
 
-#include "..\Common\DeviceResources.h"
-#include "ShaderStructures.h"
-#include "..\Common\StepTimer.h"
-
+#include "OBJModelLoader.h"
 
 namespace DX11UWA
 {
@@ -56,6 +53,19 @@ namespace DX11UWA
 
 		// System resources for Pyramid geometry.
 		uint32	p_indexCount;
+
+		// Direct3D resources for Model geometry.
+		Microsoft::WRL::ComPtr<ID3D11InputLayout>	Model_inputLayout;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		Model_vertexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		Model_indexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11VertexShader>	Model_vertexShader;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader>	Model_pixelShader;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		Model_constantBuffer;
+
+		// System resources for Model geometry.
+		uint32	Model_indexCount;
+		ObjectData FirstModel;
+		bool Loaded;
 
 		// Variables used with the rendering loop.
 		bool	m_loadingComplete;

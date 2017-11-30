@@ -1,10 +1,8 @@
 ﻿#include "pch.h"
+
 #include "Sample3DSceneRenderer.h"
 
-#include "..\Common\DirectXHelper.h"
-
 using namespace DX11UWA;
-
 using namespace DirectX;
 using namespace Windows::Foundation;
 
@@ -392,6 +390,36 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 	pindexBufferData.SysMemSlicePitch = 0;
 	CD3D11_BUFFER_DESC pindexBufferDesc(sizeof(PyramidIndices), D3D11_BIND_INDEX_BUFFER);
 	DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&pindexBufferDesc, &pindexBufferData, &p_indexBuffer));
+
+	auto loadnewVSTask = DX::ReadDataAsync(L"VertexShader.cso");
+	auto loadnewPSTask = DX::ReadDataAsync(L"PixelShader.cso");
+
+	// After the vertex shader file is loaded, create the shader and input layout.
+	auto createnewVSTask = loadnewVSTask.then([this](const std::vector<byte>& fileData)
+	{
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateVertexShader(&fileData[0], fileData.size(), nullptr, &Model_vertexShader));
+
+		static const D3D11_INPUT_ELEMENT_DESC newvertexDesc[] =
+		{
+			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "UV", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+			{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+
+		};
+
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateInputLayout(newvertexDesc, ARRAYSIZE(newvertexDesc), &fileData[0], fileData.size(), &Model_inputLayout));
+	});
+
+	// After the pixel shader file is loaded, create the shader and constant buffer.
+	auto createnewPSTask = loadnewPSTask.then([this](const std::vector<byte>& fileData)
+	{
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreatePixelShader(&fileData[0], fileData.size(), nullptr, &Model_pixelShader));
+
+		CD3D11_BUFFER_DESC newconstantBufferDesc(sizeof(ModelViewProjectionConstantBuffer), D3D11_BIND_CONSTANT_BUFFER);
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &Model_constantBuffer));
+	});
+
+	Loaded = LoadOBJFile("TP.obj", FirstModel);
 
 	// Once the cube is loaded, the object is ready to be rendered.
 	createCubeTask.then([this]()

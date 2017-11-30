@@ -30,17 +30,17 @@
     <AppXManifest Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-30T18:36:31.526</Modified>
+      <Modified>2017-11-30T22:52:14.021</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.exe">
       <PackagePath>DX11UWA.exe</PackagePath>
-      <Modified>2017-11-30T18:39:23.847</Modified>
+      <Modified>2017-11-30T22:52:13.379</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.winmd">
       <PackagePath>DX11UWA.winmd</PackagePath>
-      <Modified>2017-11-30T18:12:55.894</Modified>
+      <Modified>2017-11-30T22:52:13.031</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -76,21 +76,29 @@
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2017-11-30T18:12:47.998</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\TP.obj">
+      <PackagePath>Assets\TP.obj</PackagePath>
+      <Modified>2017-11-30T18:12:47.993</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\Tower1.obj">
+      <PackagePath>Assets\Tower1.obj</PackagePath>
+      <Modified>2017-11-30T22:50:27.709</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\PixelShader.cso">
       <PackagePath>PixelShader.cso</PackagePath>
-      <Modified>2017-11-30T18:36:20.085</Modified>
+      <Modified>2017-11-30T22:52:04.822</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\SamplePixelShader.cso">
       <PackagePath>SamplePixelShader.cso</PackagePath>
-      <Modified>2017-11-30T18:36:20.195</Modified>
+      <Modified>2017-11-30T22:52:04.946</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\SampleVertexShader.cso">
       <PackagePath>SampleVertexShader.cso</PackagePath>
-      <Modified>2017-11-30T18:36:20.295</Modified>
+      <Modified>2017-11-30T22:52:05.046</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\VertexShader.cso">
       <PackagePath>VertexShader.cso</PackagePath>
-      <Modified>2017-11-30T18:36:20.379</Modified>
+      <Modified>2017-11-30T22:52:05.181</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.15063.0\\redist\Debug\X64\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -99,7 +107,7 @@
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-30T18:36:31.075</Modified>
+      <Modified>2017-11-30T22:52:13.952</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

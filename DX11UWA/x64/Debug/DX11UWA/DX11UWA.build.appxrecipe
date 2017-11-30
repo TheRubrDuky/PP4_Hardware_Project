@@ -58,6 +58,12 @@
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\TP.obj">
+      <PackagePath>Assets\TP.obj</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\Tower1.obj">
+      <PackagePath>Assets\Tower1.obj</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\PixelShader.cso">
       <PackagePath>PixelShader.cso</PackagePath>
     </AppxPackagedFile>

@@ -113,6 +113,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11UWA_TemporaryKey.pfx" />
+    <None Include="Assets\TP.obj">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\Tower1.obj">
+      <Filter>Assets</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Content\SamplePixelShader.hlsl">

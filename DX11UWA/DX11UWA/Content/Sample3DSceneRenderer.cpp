@@ -235,28 +235,47 @@ void Sample3DSceneRenderer::Render(void)
 	// Draw the objects.
 	context->DrawIndexed(m_indexCount, 0, 0);
 
-	//Cude Translated to the rught and not moving
+	////Cude Translated to the rught and not moving
+	//XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(2.0f, 0.0f, 0.0f)));
+
+	//context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+
+	//context->DrawIndexed(m_indexCount, 0, 0);
+
+	////Pyramid translated left and rotaing on the Z axis
+	//float radiansPerSecond = XMConvertToRadians(m_degreesPerSecond);
+	//double totalRotation = Rtime * radiansPerSecond;
+	//float radians = static_cast<float>(fmod(totalRotation, XM_2PI));
+
+	//XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose( XMMatrixMultiply( XMMatrixRotationZ(radians), XMMatrixTranslation(-2.0f, 0.0f, 0.0f))));
+
+	//context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+
+	//context->IASetVertexBuffers(0, 1, p_vertexBuffer.GetAddressOf(), &stride, &offset);
+
+	//context->IASetIndexBuffer(p_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+	//context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//context->DrawIndexed(p_indexCount, 0, 0);
+
 	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(2.0f, 0.0f, 0.0f)));
 
-	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+	context->UpdateSubresource1(Model_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
 
-	context->DrawIndexed(m_indexCount, 0, 0);
+	UINT M_stride = sizeof(VertexPositionUVNormal);
+	UINT M_offset = 0;
 
-	//Pyramid translated left and rotaing on the Z axis
-	float radiansPerSecond = XMConvertToRadians(m_degreesPerSecond);
-	double totalRotation = Rtime * radiansPerSecond;
-	float radians = static_cast<float>(fmod(totalRotation, XM_2PI));
+	context->IASetVertexBuffers(0, 1, Model_vertexBuffer.GetAddressOf(), &M_stride, &M_offset);
 
-	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose( XMMatrixMultiply( XMMatrixRotationZ(radians), XMMatrixTranslation(-2.0f, 0.0f, 0.0f))));
-
-	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
-
-	context->IASetVertexBuffers(0, 1, p_vertexBuffer.GetAddressOf(), &stride, &offset);
-
-	context->IASetIndexBuffer(p_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+	context->IASetIndexBuffer(Model_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	context->DrawIndexed(p_indexCount, 0, 0);
+	context->IASetInputLayout(Model_inputLayout.Get());
+	context->VSSetShader(Model_vertexShader.Get(), nullptr, 0);
+	context->VSSetConstantBuffers1(0, 1, Model_constantBuffer.GetAddressOf(), nullptr, nullptr);
+	context->PSSetShader(Model_pixelShader.Get(), nullptr, 0);
+
+	context->DrawIndexed(Model_indexCount, 0, 0);
 
 }
 
@@ -404,7 +423,6 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 			{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 			{ "UV", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 			{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-
 		};
 
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateInputLayout(newvertexDesc, ARRAYSIZE(newvertexDesc), &fileData[0], fileData.size(), &Model_inputLayout));
@@ -419,7 +437,45 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &Model_constantBuffer));
 	});
 
-	Loaded = LoadOBJFile("TP.obj", FirstModel);
+	Loaded = LoadOBJFile("Assets/Tower1.obj", &FirstModel);
+
+	if (Loaded)
+	{
+		unsigned int ModelSize = FirstModel.MeshVerts.size();
+		VertexPositionUVNormal* ModelVertices = new VertexPositionUVNormal[ModelSize];
+
+		for (unsigned int i = 0; i < ModelSize; i++)
+		{
+			ModelVertices[i].pos = FirstModel.MeshVerts[i].Position;
+			ModelVertices[i].uv = FirstModel.MeshVerts[i].UVW;
+			ModelVertices[i].normal = FirstModel.MeshVerts[i].Normals;
+		}
+
+		D3D11_SUBRESOURCE_DATA ModelvertexBufferData = { 0 };
+		ModelvertexBufferData.pSysMem = ModelVertices;
+		ModelvertexBufferData.SysMemPitch = 0;
+		ModelvertexBufferData.SysMemSlicePitch = 0;
+		CD3D11_BUFFER_DESC ModelvertexBufferDesc(sizeof(VertexPositionUVNormal) * ModelSize, D3D11_BIND_VERTEX_BUFFER);
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&ModelvertexBufferDesc, &ModelvertexBufferData, &Model_vertexBuffer));
+
+		unsigned int ModelIndicesSize = FirstModel.MeshIndecies.size();
+		unsigned short* ModelIndices = new unsigned short[ModelIndicesSize];
+
+		for (unsigned int i = 0; i < ModelIndicesSize; i++)
+		{
+			ModelIndices[i] = FirstModel.MeshIndecies[i];
+		}
+
+		Model_indexCount = ModelIndicesSize;
+
+		D3D11_SUBRESOURCE_DATA ModelindexBufferData = { 0 };
+		ModelindexBufferData.pSysMem = ModelIndices;
+		ModelindexBufferData.SysMemPitch = 0;
+		ModelindexBufferData.SysMemSlicePitch = 0;
+		CD3D11_BUFFER_DESC ModelindexBufferDesc(sizeof(unsigned short) * ModelIndicesSize, D3D11_BIND_INDEX_BUFFER);
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&ModelindexBufferDesc, &ModelindexBufferData, &Model_indexBuffer));
+
+	}
 
 	// Once the cube is loaded, the object is ready to be rendered.
 	createCubeTask.then([this]()
@@ -440,4 +496,11 @@ void Sample3DSceneRenderer::ReleaseDeviceDependentResources(void)
 
 	p_indexBuffer.Reset();
 	p_vertexBuffer.Reset();
+
+	Model_inputLayout.Reset();
+	Model_vertexBuffer.Reset();
+	Model_indexBuffer.Reset();
+	Model_vertexShader.Reset();
+	Model_pixelShader.Reset();
+	Model_constantBuffer.Reset();
 }

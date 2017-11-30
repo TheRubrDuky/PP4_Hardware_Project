@@ -15,8 +15,22 @@ using namespace Windows::Foundation;
 struct ObjectVertices
 {
 	XMFLOAT3 Position;
-	XMFLOAT2 UV;
+	XMFLOAT3 UVW;
 	XMFLOAT3 Normals;
+
+	bool ObjectVertices::operator==(const ObjectVertices &ov)
+	{
+		if (Position.x == ov.Position.x && Position.y == ov.Position.y && Position.z == ov.Position.z &&
+			UVW.x == ov.UVW.x && UVW.y == ov.UVW.y && UVW.z == ov.UVW.z &&
+			Normals.x == ov.Normals.x && Normals.y == ov.Normals.y && Normals.z == ov.Normals.z)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 };
 
 struct ObjectData
@@ -25,14 +39,14 @@ struct ObjectData
 	vector<unsigned int> MeshIndecies;
 };
 
-static bool LoadOBJFile(const char* filepath, ObjectData Mesh)
+static bool LoadOBJFile(const char* filepath, ObjectData* Mesh)
 {
 	vector<unsigned int> TempVertIndies;
 	vector<unsigned int> TempUVIndies;
 	vector<unsigned int> TempNormalIndies;
 
 	vector<XMFLOAT3> TempVerts;
-	vector<XMFLOAT2> TempUVs;
+	vector<XMFLOAT3> TempUVs;
 	vector<XMFLOAT3> TempNormals;
 
 	FILE* objFile = fopen(filepath, "r");
@@ -63,7 +77,7 @@ static bool LoadOBJFile(const char* filepath, ObjectData Mesh)
 
 		else if (strcmp(FileHeader, "vt") == 0)
 		{
-			XMFLOAT2 tempUV;
+			XMFLOAT3 tempUV;
 
 			fscanf(objFile, "%f %f\n", &tempUV.x, &tempUV.y);
 
@@ -85,7 +99,7 @@ static bool LoadOBJFile(const char* filepath, ObjectData Mesh)
 			unsigned int uvIndex[3];
 			unsigned int normalIndex[3];
 
-			int Indexes = fscanf(objFile, "%d%d%d %d%d%d %d%d%d\n", &vertIndex[0], &uvIndex[0],
+			int Indexes = fscanf(objFile, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertIndex[0], &uvIndex[0],
 				&normalIndex[0], &vertIndex[1], &uvIndex[1], &normalIndex[1],
 				&vertIndex[2], &uvIndex[2], &normalIndex[2]);
 
@@ -117,15 +131,37 @@ static bool LoadOBJFile(const char* filepath, ObjectData Mesh)
 		ObjectVertices temp;
 
 		XMFLOAT3 vert = TempVerts[vertexIn - 1];
-		XMFLOAT2 uv = TempUVs[uvIndex - 1];
+		XMFLOAT3 uv = TempUVs[uvIndex - 1];
 		XMFLOAT3 normal = TempNormals[normalIndex - 1];
 
 		temp.Position = vert;
-		temp.UV = uv;
+		temp.UVW = uv;
+		temp.UVW.z = 0.0;
 		temp.Normals = normal;
 
-		Mesh.MeshVerts.push_back(temp);
-		Mesh.MeshIndecies.push_back(i + 1);
+		if (Mesh->MeshVerts.size() == 0)
+		{
+			Mesh->MeshVerts.push_back(temp);
+			Mesh->MeshIndecies.push_back(0);
+		}
+		else
+		{
+			for (unsigned int j = 0; j < Mesh->MeshVerts.size(); j++)
+			{
+				if (Mesh->MeshVerts[j] == temp)
+				{
+					Mesh->MeshIndecies.push_back(j);
+					break;
+				}
+				else
+				{
+						Mesh->MeshIndecies.push_back(Mesh->MeshVerts.size());
+						Mesh->MeshVerts.push_back(temp);
+
+						break;
+				}
+			}
+		}
 	}
 
 	return true;

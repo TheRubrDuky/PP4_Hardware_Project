@@ -1,2 +1,18 @@
-﻿  Sample3DSceneRenderer.cpp
+﻿  compilation object save succeeded; see F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\PixelShader.cso
+  compilation object save succeeded; see F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\SamplePixelShader.cso
+  compilation object save succeeded; see F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\SampleVertexShader.cso
+  compilation object save succeeded; see F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\VertexShader.cso
+  pch.cpp
+  App.cpp
+  DDSTextureLoader.cpp
+  DeviceResources.cpp
+  DX11UWAMain.cpp
+  SampleFpsTextRenderer.cpp
+  Sample3DSceneRenderer.cpp
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\content\objmodelloader.h(158): warning C4267: 'argument': conversion from 'size_t' to 'std::_Vbase', possible loss of data (compiling source file DX11UWAMain.cpp)
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\content\objmodelloader.h(158): warning C4267: 'argument': conversion from 'size_t' to 'std::_Vbase', possible loss of data (compiling source file App.cpp)
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\content\objmodelloader.h(158): warning C4267: 'argument': conversion from 'size_t' to 'std::_Vbase', possible loss of data (compiling source file Content\Sample3DSceneRenderer.cpp)
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\content\sample3dscenerenderer.cpp(444): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\content\sample3dscenerenderer.cpp(461): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
   DX11UWA.vcxproj -> F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.exe
+F:\Visual Studios\MSBuild\Microsoft\VisualStudio\v15.0\AppxPackage\Microsoft.AppXPackage.Targets(2015,5): warning APPX0108: The certificate specified has expired. For more information about renewing certificates, see http://go.microsoft.com/fwlink/?LinkID=241478.

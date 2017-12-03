@@ -235,30 +235,34 @@ void Sample3DSceneRenderer::Render(void)
 	// Draw the objects.
 	context->DrawIndexed(m_indexCount, 0, 0);
 
-	////Cude Translated to the rught and not moving
-	//XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(2.0f, 0.0f, 0.0f)));
-
-	//context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
-
-	//context->DrawIndexed(m_indexCount, 0, 0);
-
-	////Pyramid translated left and rotaing on the Z axis
-	//float radiansPerSecond = XMConvertToRadians(m_degreesPerSecond);
-	//double totalRotation = Rtime * radiansPerSecond;
-	//float radians = static_cast<float>(fmod(totalRotation, XM_2PI));
-
-	//XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose( XMMatrixMultiply( XMMatrixRotationZ(radians), XMMatrixTranslation(-2.0f, 0.0f, 0.0f))));
-
-	//context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
-
-	//context->IASetVertexBuffers(0, 1, p_vertexBuffer.GetAddressOf(), &stride, &offset);
-
-	//context->IASetIndexBuffer(p_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
-	//context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	//context->DrawIndexed(p_indexCount, 0, 0);
-
+	////////////////////////////////////////////////////////
+	//Cude Translated to the right and not moving
 	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(2.0f, 0.0f, 0.0f)));
+
+	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+
+	context->DrawIndexed(m_indexCount, 0, 0);
+
+	/////////////////////////////////////////////////////////
+	//Pyramid translated left and rotaing on the Z axis
+	float radiansPerSecond = XMConvertToRadians(m_degreesPerSecond);
+	double totalRotation = Rtime * radiansPerSecond;
+	float radians = static_cast<float>(fmod(totalRotation, XM_2PI));
+
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose( XMMatrixMultiply( XMMatrixRotationZ(radians), XMMatrixTranslation(-2.0f, 0.0f, 0.0f))));
+
+	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+
+	context->IASetVertexBuffers(0, 1, p_vertexBuffer.GetAddressOf(), &stride, &offset);
+
+	context->IASetIndexBuffer(p_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	context->DrawIndexed(p_indexCount, 0, 0);
+
+	///////////////////////////////////////////////////////
+	//Tower Model Translated 5 to the Right
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(5.0f, 0.0f, 0.0f)));
 
 	context->UpdateSubresource1(Model_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
 
@@ -276,6 +280,27 @@ void Sample3DSceneRenderer::Render(void)
 	context->PSSetShader(Model_pixelShader.Get(), nullptr, 0);
 
 	context->DrawIndexed(Model_indexCount, 0, 0);
+
+	///////////////////////////////////////////////////////
+	// Obj 2 Header Pyramid Translated 5 to the Left
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(-5.0f, 0.0f, 0.0f)));
+
+	context->UpdateSubresource1(O2H_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+
+	UINT M2_stride = sizeof(VertexPositionUVNormal);
+	UINT M2_offset = 0;
+
+	context->IASetVertexBuffers(0, 1, O2H_vertexBuffer.GetAddressOf(), &M2_stride, &M2_offset);
+
+	context->IASetIndexBuffer(O2H_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	context->IASetInputLayout(O2H_inputLayout.Get());
+	context->VSSetShader(O2H_vertexShader.Get(), nullptr, 0);
+	context->VSSetConstantBuffers1(0, 1, O2H_constantBuffer.GetAddressOf(), nullptr, nullptr);
+	context->PSSetShader(O2H_pixelShader.Get(), nullptr, 0);
+
+	context->DrawIndexed(O2H_indexCount, 0, 0);
 
 }
 
@@ -417,6 +442,8 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 	auto createnewVSTask = loadnewVSTask.then([this](const std::vector<byte>& fileData)
 	{
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateVertexShader(&fileData[0], fileData.size(), nullptr, &Model_vertexShader));
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateVertexShader(&fileData[0], fileData.size(), nullptr, &O2H_vertexShader));
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateVertexShader(&fileData[0], fileData.size(), nullptr, &Grid_vertexShader));
 
 		static const D3D11_INPUT_ELEMENT_DESC newvertexDesc[] =
 		{
@@ -426,15 +453,23 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 		};
 
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateInputLayout(newvertexDesc, ARRAYSIZE(newvertexDesc), &fileData[0], fileData.size(), &Model_inputLayout));
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateInputLayout(newvertexDesc, ARRAYSIZE(newvertexDesc), &fileData[0], fileData.size(), &O2H_inputLayout));
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateInputLayout(newvertexDesc, ARRAYSIZE(newvertexDesc), &fileData[0], fileData.size(), &Grid_inputLayout));
+
 	});
 
 	// After the pixel shader file is loaded, create the shader and constant buffer.
 	auto createnewPSTask = loadnewPSTask.then([this](const std::vector<byte>& fileData)
 	{
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreatePixelShader(&fileData[0], fileData.size(), nullptr, &Model_pixelShader));
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreatePixelShader(&fileData[0], fileData.size(), nullptr, &O2H_pixelShader));
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreatePixelShader(&fileData[0], fileData.size(), nullptr, &Grid_pixelShader));
 
 		CD3D11_BUFFER_DESC newconstantBufferDesc(sizeof(ModelViewProjectionConstantBuffer), D3D11_BIND_CONSTANT_BUFFER);
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &Model_constantBuffer));
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &O2H_constantBuffer));
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &Grid_constantBuffer));
+
 	});
 
 	Loaded = LoadOBJFile("Assets/Tower1.obj", &FirstModel);
@@ -477,6 +512,49 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 
 	}
 
+	VertexPositionUVNormal O2HVertices[768];
+
+	for (unsigned int i = 0; i < 768; i++)
+	{
+		O2HVertices[i].pos.x = test_pyramid_data[i].pos[0];
+		O2HVertices[i].pos.y = test_pyramid_data[i].pos[1];
+		O2HVertices[i].pos.z = test_pyramid_data[i].pos[2];
+
+		O2HVertices[i].uv.x = test_pyramid_data[i].uvw[0];
+		O2HVertices[i].uv.y = test_pyramid_data[i].uvw[1];
+		O2HVertices[i].uv.z = test_pyramid_data[i].uvw[2];
+		
+
+		O2HVertices[i].normal.x = test_pyramid_data[i].nrm[0];
+		O2HVertices[i].normal.y = test_pyramid_data[i].nrm[1];
+		O2HVertices[i].normal.z = test_pyramid_data[i].nrm[2];
+	}
+
+	D3D11_SUBRESOURCE_DATA O2HvertexBufferData = { 0 };
+	O2HvertexBufferData.pSysMem = O2HVertices;
+	O2HvertexBufferData.SysMemPitch = 0;
+	O2HvertexBufferData.SysMemSlicePitch = 0;
+	CD3D11_BUFFER_DESC O2HvertexBufferDesc(sizeof(O2HVertices), D3D11_BIND_VERTEX_BUFFER);
+	DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&O2HvertexBufferDesc, &O2HvertexBufferData, &O2H_vertexBuffer));
+
+	unsigned short O2HIndices[1674];
+
+	for (unsigned int i = 0; i < 1674; i++)
+	{
+		O2HIndices[i] = 0;
+
+		O2HIndices[i] = (unsigned short)(test_pyramid_indicies[i]);
+	}
+
+	O2H_indexCount = ARRAYSIZE(O2HIndices);
+
+	D3D11_SUBRESOURCE_DATA O2HindexBufferData = { 0 };
+	O2HindexBufferData.pSysMem = O2HIndices;
+	O2HindexBufferData.SysMemPitch = 0;
+	O2HindexBufferData.SysMemSlicePitch = 0;
+	CD3D11_BUFFER_DESC O2HindexBufferDesc(sizeof(O2HIndices), D3D11_BIND_INDEX_BUFFER);
+	DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&O2HindexBufferDesc, &O2HindexBufferData, &O2H_indexBuffer));
+
 	// Once the cube is loaded, the object is ready to be rendered.
 	createCubeTask.then([this]()
 	{
@@ -503,4 +581,11 @@ void Sample3DSceneRenderer::ReleaseDeviceDependentResources(void)
 	Model_vertexShader.Reset();
 	Model_pixelShader.Reset();
 	Model_constantBuffer.Reset();
+
+	O2H_inputLayout.Reset();
+	O2H_vertexBuffer.Reset();
+	O2H_indexBuffer.Reset();
+	O2H_vertexShader.Reset();
+	O2H_pixelShader.Reset();
+	O2H_constantBuffer.Reset();
 }

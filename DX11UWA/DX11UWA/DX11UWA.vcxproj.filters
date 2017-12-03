@@ -102,6 +102,9 @@
     <ClInclude Include="Content\OBJModelLoader.h">
       <Filter>Content\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Content\test pyramid.h">
+      <Filter>Content\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\StoreLogo.png">

@@ -18,7 +18,7 @@
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
     <LayoutDir>F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\AppX</LayoutDir>
-    <RegisteredManifestChecksum>B5C6628EEF3B11ED53AC0ED10E4BEE348C16BE7A42DA9FB25958A5BFC2B05F65</RegisteredManifestChecksum>
+    <RegisteredManifestChecksum>64708C8CE2C7A60DBFAF572399CC471C24ADC572CC98689EEC8FA7AEE7C5D9E5</RegisteredManifestChecksum>
     <RegisteredPackageMoniker>54014835-9bba-472b-bf12-b7d15c2fdce2_1.0.0.0_x64__m2mhzkw71ghyc</RegisteredPackageMoniker>
     <RegisteredUserModeAppID>54014835-9bba-472b-bf12-b7d15c2fdce2_m2mhzkw71ghyc!App</RegisteredUserModeAppID>
     <RegisteredPackageID>54014835-9bba-472b-bf12-b7d15c2fdce2</RegisteredPackageID>
@@ -30,13 +30,13 @@
     <AppXManifest Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-30T22:52:14.021</Modified>
+      <Modified>2017-12-01T22:05:10.691</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.exe">
       <PackagePath>DX11UWA.exe</PackagePath>
-      <Modified>2017-11-30T22:52:13.379</Modified>
+      <Modified>2017-12-03T16:04:57.181</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.winmd">
       <PackagePath>DX11UWA.winmd</PackagePath>
@@ -107,7 +107,7 @@
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-11-30T22:52:13.952</Modified>
+      <Modified>2017-12-01T22:05:10.376</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

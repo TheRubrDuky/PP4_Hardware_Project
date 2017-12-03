@@ -201,6 +201,7 @@
     <ClInclude Include="Common\DDSTextureLoader.h" />
     <ClInclude Include="Common\DeviceResources.h" />
     <ClInclude Include="Content\OBJModelLoader.h" />
+    <ClInclude Include="Content\test pyramid.h" />
     <ClInclude Include="DX11UWAMain.h" />
     <ClInclude Include="Common\DirectXHelper.h" />
     <ClInclude Include="Common\StepTimer.h" />

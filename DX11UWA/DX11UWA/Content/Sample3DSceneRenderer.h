@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "OBJModelLoader.h"
+#include "test pyramid.h"
 
 namespace DX11UWA
 {
@@ -66,6 +67,28 @@ namespace DX11UWA
 		uint32	Model_indexCount;
 		ObjectData FirstModel;
 		bool Loaded;
+
+		// Direct3D resources for Obj2Header Pyramid geometry.
+		Microsoft::WRL::ComPtr<ID3D11InputLayout>	O2H_inputLayout;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		O2H_vertexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		O2H_indexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11VertexShader>	O2H_vertexShader;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader>	O2H_pixelShader;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		O2H_constantBuffer;
+
+		// System resources for Obj2Header Pyramid geometry.
+		uint32	O2H_indexCount;
+
+		// Direct3D resources for Obj2Header Pyramid geometry.
+		Microsoft::WRL::ComPtr<ID3D11InputLayout>	Grid_inputLayout;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		Grid_vertexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		Grid_indexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11VertexShader>	Grid_vertexShader;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader>	Grid_pixelShader;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		Grid_constantBuffer;
+
+		// System resources for Obj2Header Pyramid geometry.
+		uint32	Grid_indexCount;
 
 		// Variables used with the rendering loop.
 		bool	m_loadingComplete;

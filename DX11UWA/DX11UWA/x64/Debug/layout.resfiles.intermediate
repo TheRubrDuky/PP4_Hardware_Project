@@ -1,5 +1,8 @@
+Assets\156_WM.dds
+Assets\169_WithMips.dds
 Assets\LockScreenLogo.scale-200.png
 Assets\SplashScreen.scale-200.png
+Assets\spyro1.obj
 Assets\Square150x150Logo.scale-200.png
 Assets\Square44x44Logo.scale-200.png
 Assets\Square44x44Logo.targetsize-24_altform-unplated.png
@@ -10,4 +13,6 @@ Assets\Wide310x150Logo.scale-200.png
 PixelShader.cso
 SamplePixelShader.cso
 SampleVertexShader.cso
+TexturingPixelShader.cso
+TexturingVertexShader.cso
 VertexShader.cso

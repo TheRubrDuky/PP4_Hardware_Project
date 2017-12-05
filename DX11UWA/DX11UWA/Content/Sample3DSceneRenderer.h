@@ -2,6 +2,7 @@
 
 #include "OBJModelLoader.h"
 #include "test pyramid.h"
+#include "Common\DDSTextureLoader.h"
 
 namespace DX11UWA
 {
@@ -35,6 +36,13 @@ namespace DX11UWA
 	private:
 		// Cached pointer to device resources.
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
+
+		ID3D11Texture2D* MossTexture = nullptr;
+		ID3D11ShaderResourceView* Moss_SRV = nullptr;
+		ID3D11SamplerState* WrapState = nullptr;
+
+		ID3D11Texture2D* ConcreteTexture = nullptr;
+		ID3D11ShaderResourceView* Concrete_SRV = nullptr;
 
 		// Direct3D resources for cube geometry.
 		Microsoft::WRL::ComPtr<ID3D11InputLayout>	m_inputLayout;
@@ -89,6 +97,19 @@ namespace DX11UWA
 
 		// System resources for Obj2Header Pyramid geometry.
 		uint32	Grid_indexCount;
+
+		// Direct3D resources for Spyro Model geometry.
+		Microsoft::WRL::ComPtr<ID3D11InputLayout>	SModel_inputLayout;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		SModel_vertexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		SModel_indexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11VertexShader>	SModel_vertexShader;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader>	SModel_pixelShader;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		SModel_constantBuffer;
+
+		// System resources for Spyro Model geometry.
+		uint32	SModel_indexCount;
+		ObjectData SpyroModel;
+		bool SpyroLoaded;
 
 		// Variables used with the rendering loop.
 		bool	m_loadingComplete;

@@ -31,6 +31,12 @@
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.winmd">
       <PackagePath>DX11UWA.winmd</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\156_WM.dds">
+      <PackagePath>Assets\156_WM.dds</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\169_WithMips.dds">
+      <PackagePath>Assets\169_WithMips.dds</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
@@ -64,6 +70,9 @@
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\Tower1.obj">
       <PackagePath>Assets\Tower1.obj</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\spyro1.obj">
+      <PackagePath>Assets\spyro1.obj</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\PixelShader.cso">
       <PackagePath>PixelShader.cso</PackagePath>
     </AppxPackagedFile>
@@ -72,6 +81,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\SampleVertexShader.cso">
       <PackagePath>SampleVertexShader.cso</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\TexturingPixelShader.cso">
+      <PackagePath>TexturingPixelShader.cso</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\TexturingVertexShader.cso">
+      <PackagePath>TexturingVertexShader.cso</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\VertexShader.cso">
       <PackagePath>VertexShader.cso</PackagePath>

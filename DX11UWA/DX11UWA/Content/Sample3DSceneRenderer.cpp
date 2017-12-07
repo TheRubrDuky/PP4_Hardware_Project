@@ -28,7 +28,7 @@ void Sample3DSceneRenderer::CreateWindowSizeDependentResources(void)
 {
 	Size outputSize = m_deviceResources->GetOutputSize();
 	float aspectRatio = outputSize.Width / outputSize.Height;
-	float fovAngleY = 70.0f * XM_PI / 180.0f;
+	fovAngleY = 70.0f * XM_PI / 180.0f;
 
 	// This is a simple example of change that can be made when the app is in
 	// portrait or snapped view.
@@ -44,7 +44,7 @@ void Sample3DSceneRenderer::CreateWindowSizeDependentResources(void)
 	// this transform should not be applied.
 
 	// This sample makes use of a right-handed coordinate system using row-major matrices.
-	XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, 0.01f, 100.0f);
+	XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, NearPlane, FarPlane);
 
 	XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
 
@@ -135,6 +135,273 @@ void Sample3DSceneRenderer::UpdateCamera(DX::StepTimer const& timer, float const
 		XMStoreFloat4x4(&m_camera, result);
 	}
 
+	if (m_kbuttons['V'])
+	{
+		Size outputSize = m_deviceResources->GetOutputSize();
+
+		float aspectRatio = outputSize.Width / outputSize.Height;
+
+		fovAngleY = fovAngleY + (delta_time);
+
+		if (aspectRatio < 1.0f)
+		{
+			fovAngleY *= 2.0f;
+		}
+
+		if (fovAngleY >= (150.0f * XM_PI / 180.0f))
+		{
+			fovAngleY = (150.0f * XM_PI / 180.0f);
+		}
+
+		XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, NearPlane, FarPlane);
+
+		XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
+
+		XMMATRIX orientationMatrix = XMLoadFloat4x4(&orientation);
+
+		XMStoreFloat4x4(&m_constantBufferData.projection, XMMatrixTranspose(perspectiveMatrix * orientationMatrix));
+	}
+
+	if (m_kbuttons['B'])
+	{
+		Size outputSize = m_deviceResources->GetOutputSize();
+
+		float aspectRatio = outputSize.Width / outputSize.Height;
+
+		fovAngleY = fovAngleY - (delta_time);
+
+		if (aspectRatio < 1.0f)
+		{
+			fovAngleY *= 2.0f;
+		}
+
+		if (fovAngleY <= (30.0f * XM_PI / 180.0f))
+		{
+			fovAngleY = (30.0f * XM_PI / 180.0f);
+		}
+
+		XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, NearPlane, FarPlane);
+
+		XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
+
+		XMMATRIX orientationMatrix = XMLoadFloat4x4(&orientation);
+
+		XMStoreFloat4x4(&m_constantBufferData.projection, XMMatrixTranspose(perspectiveMatrix * orientationMatrix));
+	}
+
+	if (m_kbuttons['C'])
+	{
+		Size outputSize = m_deviceResources->GetOutputSize();
+
+		float aspectRatio = outputSize.Width / outputSize.Height;
+
+		fovAngleY = (70.0f * XM_PI / 180.0f);
+
+		if (aspectRatio < 1.0f)
+		{
+			fovAngleY *= 2.0f;
+		}
+
+		XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, NearPlane, FarPlane);
+
+		XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
+
+		XMMATRIX orientationMatrix = XMLoadFloat4x4(&orientation);
+
+		XMStoreFloat4x4(&m_constantBufferData.projection, XMMatrixTranspose(perspectiveMatrix * orientationMatrix));
+	}
+
+	if (m_kbuttons['I'])
+	{
+		Size outputSize = m_deviceResources->GetOutputSize();
+
+		float aspectRatio = outputSize.Width / outputSize.Height;
+
+		if (aspectRatio < 1.0f)
+		{
+			fovAngleY *= 2.0f;
+		}
+
+		NearPlane = NearPlane - 0.1f;
+
+		if (NearPlane <= 0.01f)
+		{
+			NearPlane = 0.01f;
+		}
+
+		XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, NearPlane, FarPlane);
+
+		XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
+
+		XMMATRIX orientationMatrix = XMLoadFloat4x4(&orientation);
+
+		XMStoreFloat4x4(&m_constantBufferData.projection, XMMatrixTranspose(perspectiveMatrix * orientationMatrix));
+	}
+
+	if (m_kbuttons['O'])
+	{
+		Size outputSize = m_deviceResources->GetOutputSize();
+
+		float aspectRatio = outputSize.Width / outputSize.Height;
+
+		if (aspectRatio < 1.0f)
+		{
+			fovAngleY *= 2.0f;
+		}
+
+		NearPlane = NearPlane + 0.1f;
+
+		if (NearPlane >= 50.0f)
+		{
+			NearPlane = 50.0f;
+		}
+
+		XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, NearPlane, FarPlane);
+
+		XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
+
+		XMMATRIX orientationMatrix = XMLoadFloat4x4(&orientation);
+
+		XMStoreFloat4x4(&m_constantBufferData.projection, XMMatrixTranspose(perspectiveMatrix * orientationMatrix));
+	}
+
+	if (m_kbuttons['K'])
+	{
+		Size outputSize = m_deviceResources->GetOutputSize();
+
+		float aspectRatio = outputSize.Width / outputSize.Height;
+
+		if (aspectRatio < 1.0f)
+		{
+			fovAngleY *= 2.0f;
+		}
+
+		FarPlane = FarPlane - 0.1f;
+
+		if (FarPlane <= 10.0f)
+		{
+			FarPlane = 10.0f;
+		}
+
+		XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, NearPlane, FarPlane);
+
+		XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
+
+		XMMATRIX orientationMatrix = XMLoadFloat4x4(&orientation);
+
+		XMStoreFloat4x4(&m_constantBufferData.projection, XMMatrixTranspose(perspectiveMatrix * orientationMatrix));
+	}
+
+	if (m_kbuttons['L'])
+	{
+		Size outputSize = m_deviceResources->GetOutputSize();
+
+		float aspectRatio = outputSize.Width / outputSize.Height;
+
+		if (aspectRatio < 1.0f)
+		{
+			fovAngleY *= 2.0f;
+		}
+
+		FarPlane = FarPlane + 0.1f;
+
+		if (FarPlane >= 100.0f)
+		{
+			FarPlane = 100.0f;
+		}
+
+		XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, NearPlane, FarPlane);
+
+		XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
+
+		XMMATRIX orientationMatrix = XMLoadFloat4x4(&orientation);
+
+		XMStoreFloat4x4(&m_constantBufferData.projection, XMMatrixTranspose(perspectiveMatrix * orientationMatrix));
+	}
+
+	if (m_kbuttons['U'])
+	{
+		Size outputSize = m_deviceResources->GetOutputSize();
+
+		float aspectRatio = outputSize.Width / outputSize.Height;
+
+		if (aspectRatio < 1.0f)
+		{
+			fovAngleY *= 2.0f;
+		}
+
+		NearPlane = 0.01f;
+
+		XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, NearPlane, FarPlane);
+
+		XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
+
+		XMMATRIX orientationMatrix = XMLoadFloat4x4(&orientation);
+
+		XMStoreFloat4x4(&m_constantBufferData.projection, XMMatrixTranspose(perspectiveMatrix * orientationMatrix));
+	}
+
+	if (m_kbuttons['J'])
+	{
+		Size outputSize = m_deviceResources->GetOutputSize();
+
+		float aspectRatio = outputSize.Width / outputSize.Height;
+
+		if (aspectRatio < 1.0f)
+		{
+			fovAngleY *= 2.0f;
+		}
+
+		FarPlane = 100.0f;
+
+		XMMATRIX perspectiveMatrix = XMMatrixPerspectiveFovLH(fovAngleY, aspectRatio, NearPlane, FarPlane);
+
+		XMFLOAT4X4 orientation = m_deviceResources->GetOrientationTransform3D();
+
+		XMMATRIX orientationMatrix = XMLoadFloat4x4(&orientation);
+
+		XMStoreFloat4x4(&m_constantBufferData.projection, XMMatrixTranspose(perspectiveMatrix * orientationMatrix));
+	}
+
+	if (m_kbuttons['1'])
+	{
+		if (DLight == 0)
+		{
+			DLight = 1;
+		}
+
+		else
+		{
+			DLight = 0;
+		}
+	}
+
+	if (m_kbuttons['2'])
+	{
+		if (PLight == 0)
+		{	
+			PLight = 1;
+		}	
+			
+		else
+		{	
+			PLight = 0;
+		}
+	}
+
+	if (m_kbuttons['3'])
+	{
+		if (SLight == 0)
+		{
+			SLight = 1;
+		}
+
+		else
+		{
+			SLight = 0;
+		}
+	}
+
 	if (m_currMousePos) 
 	{
 		if (m_currMousePos->Properties->IsRightButtonPressed && m_prevMousePos)
@@ -163,6 +430,28 @@ void Sample3DSceneRenderer::UpdateCamera(DX::StepTimer const& timer, float const
 		}
 		m_prevMousePos = m_currMousePos;
 	}
+
+	if (LightProperties.LightArray[0].direction.x >= 5.0f)
+	{
+		LightProperties.LightArray[0].direction.x = -5.0f;
+	}
+	LightProperties.LightArray[0].direction.x = (LightProperties.LightArray[0].direction.x + (delta_time * 2));
+
+	if (LightProperties.LightArray[1].pos.x <= -5.0f && LightProperties.LightArray[1].pos.z <= -5.0f)
+	{
+		LightProperties.LightArray[1].pos.x = 5.0f;
+		LightProperties.LightArray[1].pos.z = 5.0f;
+	}
+
+	LightProperties.LightArray[1].pos.x = (LightProperties.LightArray[1].pos.x - (delta_time));
+	LightProperties.LightArray[1].pos.z = (LightProperties.LightArray[1].pos.x - (delta_time));
+
+	if (LightProperties.LightArray[2].angle.z <= -1.0f)
+	{
+		LightProperties.LightArray[2].angle.z = 1.0f;
+	}
+
+	LightProperties.LightArray[2].angle.z = LightProperties.LightArray[2].angle.z - (delta_time * 0.5f);
 
 
 }
@@ -240,9 +529,14 @@ void Sample3DSceneRenderer::Render(void)
 
 	LightProperties.CameraPos = { m_camera._41, m_camera._42, m_camera._43, m_camera._44 };
 
+	LightProperties.LightArray[0].enabled.x = DLight;
+
+	LightProperties.LightArray[1].enabled.x = PLight;
+
+	LightProperties.LightArray[2].enabled.x = SLight;
+
 	context->UpdateSubresource1(Lights_constantBuffer.Get(), 0, NULL, &LightProperties, 0, 0, 0);
 	
-
 	// Prepare the constant buffer to send it to the graphics device.
 	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
 	// Each vertex is one instance of the VertexPositionColor struct.
@@ -288,28 +582,28 @@ void Sample3DSceneRenderer::Render(void)
 	//context->DrawIndexed(p_indexCount, 0, 0);
 
 	///////////////////////////////////////////////////////
-	//Tower Model Translated 5 to the Right
-	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(5.0f, 0.0f, 0.0f)));
+	////Tower Model Translated 5 to the Right
+	//XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(5.0f, 0.0f, 0.0f)));
 
-	context->UpdateSubresource1(Model_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+	//context->UpdateSubresource1(Model_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
 
-	UINT M_stride = sizeof(VertexPositionUVNormal);
-	UINT M_offset = 0;
+	//UINT M_stride = sizeof(VertexPositionUVNormal);
+	//UINT M_offset = 0;
 
-	context->IASetVertexBuffers(0, 1, Model_vertexBuffer.GetAddressOf(), &M_stride, &M_offset);
+	//context->IASetVertexBuffers(0, 1, Model_vertexBuffer.GetAddressOf(), &M_stride, &M_offset);
 
-	context->IASetIndexBuffer(Model_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	//context->IASetIndexBuffer(Model_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+	//context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	context->IASetInputLayout(Model_inputLayout.Get());
-	context->VSSetShader(Model_vertexShader.Get(), nullptr, 0);
-	context->VSSetConstantBuffers1(0, 1, Model_constantBuffer.GetAddressOf(), nullptr, nullptr);
+	//context->IASetInputLayout(Model_inputLayout.Get());
+	//context->VSSetShader(Model_vertexShader.Get(), nullptr, 0);
+	//context->VSSetConstantBuffers1(0, 1, Model_constantBuffer.GetAddressOf(), nullptr, nullptr);
 	context->PSSetShaderResources(0, 1, &TextureArray[1]);
 	context->PSSetSamplers(0, 1, &SampleStates[0]);
 	context->PSSetConstantBuffers(1, 1, Lights_constantBuffer.GetAddressOf());
-	context->PSSetShader(Model_pixelShader.Get(), nullptr, 0);
+	//context->PSSetShader(Model_pixelShader.Get(), nullptr, 0);
 
-	context->DrawIndexed(Model_indexCount, 0, 0);
+	//context->DrawIndexed(Model_indexCount, 0, 0);
 
 	/////////////////////////////////////////////////////
 	//Spyro Model Translated 5 to the Right
@@ -792,10 +1086,10 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 #pragma endregion
 
 #pragma region Lights
-	DirLight.enabled = {1, 0};
+	DirLight.enabled = {0, 0};
 	DirLight.pos = { 0.0f, 0.0f, 0.0f, 1.0f };
 	DirLight.direction = {0.0f, -1.0f, 0.0f, 1.0f};
-	DirLight.color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	DirLight.color = { 1.0f, 0.0f, 0.0f, 1.0f };
 	DirLight.angle = { 0.0f, 0.0f, 0.0f, 0.0f };
 	DirLight.angleratio = { 0.0f, 0.0f };
 	DirLight.C_att = { 1.0f, 0.0f };
@@ -807,19 +1101,19 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 	PointLight.enabled = { 0, 0 };
 	PointLight.pos = { 0.0f, 2.0f, 0.0f, 1.0f };
 	PointLight.direction = { -5.0f, 5.0f, 0.0f, 0.0f };
-	PointLight.color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	PointLight.color = { 0.0f, 1.0f, 0.0f, 1.0f };
 	PointLight.angle = { 0.0f, 0.0f, 0.0f, 0.0f };
 	PointLight.angleratio = { 0.0f, 0.0f };
-	PointLight.C_att = { 1.0f, 0.0f };
-	PointLight.L_att = { 1.0f, 0.0f };
-	PointLight.Q_att = { 0.0f, 0.0f };
+	PointLight.C_att = { 0.25f, 0.0f };
+	PointLight.L_att = { 0.0f, 0.0f };
+	PointLight.Q_att = { 0.25f, 0.0f };
 	PointLight.type = { 1, 0 };
 	PointLight.padding = { 0, 0, 0, 0 };
 
 	SpotLight.enabled = { 0, 0 };
 	SpotLight.pos = { 0.0f, 6.0f, 0.0f, 1.0f };
 	SpotLight.direction = { 0.0f, 0.0f, 0.0f, 0.0f };
-	SpotLight.color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	SpotLight.color = { 0.0f, 0.0f, 1.0f, 1.0f };
 	SpotLight.angle = { 0.0f, -2.0f, 1.0f, 0.0f };
 	SpotLight.angleratio = { 0.95f, 0.90f };
 	SpotLight.C_att = { 1.0f, 0.0f };

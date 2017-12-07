@@ -37,6 +37,10 @@ namespace DX11UWA
 		// Cached pointer to device resources.
 		std::shared_ptr<DX::DeviceResources> m_deviceResources;
 
+		float fovAngleY = 0.0f;
+		float NearPlane = 0.01f;
+		float FarPlane = 100.0f;
+
 		ID3D11Texture2D* MossTexture = nullptr;
 		ID3D11ShaderResourceView* Moss_SRV = nullptr;
 
@@ -48,6 +52,10 @@ namespace DX11UWA
 		Lights DirLight;
 		Lights SpotLight;
 		Lights PointLight;
+
+		unsigned int DLight = 0;
+		unsigned int PLight = 0;
+		unsigned int SLight = 0;
 
 		LightProp LightProperties;
 

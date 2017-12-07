@@ -2,7 +2,7 @@
 F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Content\TexturingPixelShader.hlsl(59,9-50): warning X3206: implicit truncation of vector type
 F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Content\TexturingPixelShader.hlsl(74,9-50): warning X3206: implicit truncation of vector type
 F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Content\TexturingPixelShader.hlsl(76,29-66): warning X3206: 'dot': implicit truncation of vector type
-  compilation object save succeeded; see F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\TexturingPixelShader.cso
 F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Content\TexturingPixelShader.hlsl(133,17-61): warning X3206: 'Sample': implicit truncation of vector type
   
+  compilation object save succeeded; see F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\TexturingPixelShader.cso
   DX11UWA.vcxproj -> F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.exe

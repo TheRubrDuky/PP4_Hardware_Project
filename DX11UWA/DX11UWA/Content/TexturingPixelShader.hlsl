@@ -134,7 +134,7 @@ float4 main(PixelShaderInput input) : SV_TARGET
 
 	float4 FinalColor = TotalLighting(input.posWS, normalize(input.norm), Color);
 
-	float4 Ambiance = { 0.20f, 0.20f, 0.20f, 1.0f };
+	float4 Ambiance = { 0.30f, 0.30f, 0.30f, 1.0f };
 
 	Ambiance = Ambiance * Color;
 

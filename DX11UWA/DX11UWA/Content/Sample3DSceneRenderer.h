@@ -39,10 +39,19 @@ namespace DX11UWA
 
 		ID3D11Texture2D* MossTexture = nullptr;
 		ID3D11ShaderResourceView* Moss_SRV = nullptr;
+
 		ID3D11SamplerState* WrapState = nullptr;
 
 		ID3D11Texture2D* ConcreteTexture = nullptr;
 		ID3D11ShaderResourceView* Concrete_SRV = nullptr;
+
+		Lights DirLight;
+		Lights SpotLight;
+		Lights PointLight;
+
+		LightProp LightProperties;
+
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		Lights_constantBuffer;
 
 		// Direct3D resources for cube geometry.
 		Microsoft::WRL::ComPtr<ID3D11InputLayout>	m_inputLayout;

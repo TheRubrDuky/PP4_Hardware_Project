@@ -217,15 +217,31 @@ void Sample3DSceneRenderer::Render(void)
 	ID3D11ShaderResourceView* TextureArray[] = { Moss_SRV, Concrete_SRV };
 	
 	D3D11_SAMPLER_DESC Sample1;
+	ZeroMemory(&Sample1, sizeof(D3D11_SAMPLER_DESC));
+	Sample1.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	Sample1.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	Sample1.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-	Sample1.Filter = D3D11_FILTER_MIN_MAG_POINT_MIP_LINEAR;
+	Sample1.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	Sample1.MipLODBias = 0.0f;
+	Sample1.MaxAnisotropy = 1;
+	Sample1.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	Sample1.BorderColor[0] = 1.0f;
+	Sample1.BorderColor[1] = 1.0f;
+	Sample1.BorderColor[2] = 1.0f;
+	Sample1.BorderColor[3] = 1.0f;
+	Sample1.MinLOD = -FLT_MAX;
+	Sample1.MaxLOD = FLT_MAX;
 
 	m_deviceResources->GetD3DDevice()->CreateSamplerState(&Sample1, &WrapState);
 
 	ID3D11SamplerState* SampleStates[] = { WrapState };
 
 	XMStoreFloat4x4(&m_constantBufferData.view, XMMatrixTranspose(XMMatrixInverse(nullptr, XMLoadFloat4x4(&m_camera))));
+
+	LightProperties.CameraPos = { m_camera._41, m_camera._42, m_camera._43, m_camera._44 };
+
+	context->UpdateSubresource1(Lights_constantBuffer.Get(), 0, NULL, &LightProperties, 0, 0, 0);
+	
 
 	// Prepare the constant buffer to send it to the graphics device.
 	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
@@ -248,28 +264,28 @@ void Sample3DSceneRenderer::Render(void)
 
 	////////////////////////////////////////////////////////
 	//Cude Translated to the right and not moving
-	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(2.0f, 0.0f, 0.0f)));
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(5.0f, 10.0f, 1.0f)));
 
 	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
 
 	context->DrawIndexed(m_indexCount, 0, 0);
 
-	/////////////////////////////////////////////////////////
-	//Pyramid translated left and rotaing on the Z axis
-	float radiansPerSecond = XMConvertToRadians(m_degreesPerSecond);
-	double totalRotation = Rtime * radiansPerSecond;
-	float radians = static_cast<float>(fmod(totalRotation, XM_2PI));
+	///////////////////////////////////////////////////////////
+	////Pyramid translated left and rotaing on the Z axis
+	//float radiansPerSecond = XMConvertToRadians(m_degreesPerSecond);
+	//double totalRotation = Rtime * radiansPerSecond;
+	//float radians = static_cast<float>(fmod(totalRotation, XM_2PI));
 
-	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose( XMMatrixMultiply( XMMatrixRotationZ(radians), XMMatrixTranslation(-2.0f, 0.0f, 0.0f))));
+	//XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose( XMMatrixMultiply( XMMatrixRotationZ(radians), XMMatrixTranslation(-2.0f, 0.0f, 0.0f))));
 
-	context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+	//context->UpdateSubresource1(m_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
 
-	context->IASetVertexBuffers(0, 1, p_vertexBuffer.GetAddressOf(), &stride, &offset);
+	//context->IASetVertexBuffers(0, 1, p_vertexBuffer.GetAddressOf(), &stride, &offset);
 
-	context->IASetIndexBuffer(p_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	//context->IASetIndexBuffer(p_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+	//context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	context->DrawIndexed(p_indexCount, 0, 0);
+	//context->DrawIndexed(p_indexCount, 0, 0);
 
 	///////////////////////////////////////////////////////
 	//Tower Model Translated 5 to the Right
@@ -290,6 +306,7 @@ void Sample3DSceneRenderer::Render(void)
 	context->VSSetConstantBuffers1(0, 1, Model_constantBuffer.GetAddressOf(), nullptr, nullptr);
 	context->PSSetShaderResources(0, 1, &TextureArray[1]);
 	context->PSSetSamplers(0, 1, &SampleStates[0]);
+	context->PSSetConstantBuffers(1, 1, Lights_constantBuffer.GetAddressOf());
 	context->PSSetShader(Model_pixelShader.Get(), nullptr, 0);
 
 	context->DrawIndexed(Model_indexCount, 0, 0);
@@ -529,6 +546,9 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &O2H_constantBuffer));
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &Grid_constantBuffer));
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &SModel_constantBuffer));
+
+		CD3D11_BUFFER_DESC LightsconstantBufferDesc(sizeof(LightProp), D3D11_BIND_CONSTANT_BUFFER);
+		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&LightsconstantBufferDesc, nullptr, &Lights_constantBuffer));
 
 	});
 	
@@ -771,6 +791,48 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 
 #pragma endregion
 
+#pragma region Lights
+	DirLight.enabled = {1, 0};
+	DirLight.pos = { 0.0f, 0.0f, 0.0f, 1.0f };
+	DirLight.direction = {0.0f, -1.0f, 0.0f, 1.0f};
+	DirLight.color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	DirLight.angle = { 0.0f, 0.0f, 0.0f, 0.0f };
+	DirLight.angleratio = { 0.0f, 0.0f };
+	DirLight.C_att = { 1.0f, 0.0f };
+	DirLight.L_att = { 1.0f, 0.0f };
+	DirLight.Q_att = { 0.0f, 0.0f };
+	DirLight.type = { 0, 0 };
+	DirLight.padding = { 0, 0, 0, 0 };
+
+	PointLight.enabled = { 0, 0 };
+	PointLight.pos = { 0.0f, 2.0f, 0.0f, 1.0f };
+	PointLight.direction = { -5.0f, 5.0f, 0.0f, 0.0f };
+	PointLight.color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	PointLight.angle = { 0.0f, 0.0f, 0.0f, 0.0f };
+	PointLight.angleratio = { 0.0f, 0.0f };
+	PointLight.C_att = { 1.0f, 0.0f };
+	PointLight.L_att = { 1.0f, 0.0f };
+	PointLight.Q_att = { 0.0f, 0.0f };
+	PointLight.type = { 1, 0 };
+	PointLight.padding = { 0, 0, 0, 0 };
+
+	SpotLight.enabled = { 0, 0 };
+	SpotLight.pos = { 0.0f, 6.0f, 0.0f, 1.0f };
+	SpotLight.direction = { 0.0f, 0.0f, 0.0f, 0.0f };
+	SpotLight.color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	SpotLight.angle = { 0.0f, -2.0f, 1.0f, 0.0f };
+	SpotLight.angleratio = { 0.95f, 0.90f };
+	SpotLight.C_att = { 1.0f, 0.0f };
+	SpotLight.L_att = { 0.0f, 0.0f };
+	SpotLight.Q_att = { 0.0f, 0.0f };
+	SpotLight.type = { 2, 0 };
+	SpotLight.padding = { 0, 0, 0, 0 };
+
+	LightProperties.LightArray[0] = DirLight;
+	LightProperties.LightArray[1] = PointLight;
+	LightProperties.LightArray[2] = SpotLight;
+#pragma endregion
+
 	// Once the cube is loaded, the object is ready to be rendered.
 	createCubeTask.then([this]()
 	{
@@ -811,6 +873,8 @@ void Sample3DSceneRenderer::ReleaseDeviceDependentResources(void)
 	SModel_vertexShader.Reset();
 	SModel_pixelShader.Reset();
 	SModel_constantBuffer.Reset();
+
+	Lights_constantBuffer.Reset();
 
 	MossTexture->Release();
 	Moss_SRV->Release();

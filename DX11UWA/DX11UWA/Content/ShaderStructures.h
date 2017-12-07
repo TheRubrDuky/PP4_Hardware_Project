@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#define LIGHT_AMOUNT 3
+
 namespace DX11UWA
 {
 	// Constant buffer used to send MVP matrices to the vertex shader.
@@ -8,6 +10,29 @@ namespace DX11UWA
 		DirectX::XMFLOAT4X4 model;
 		DirectX::XMFLOAT4X4 view;
 		DirectX::XMFLOAT4X4 projection;
+	};
+
+	struct Lights
+	{
+		DirectX::XMFLOAT4 pos;
+		DirectX::XMFLOAT4 direction;
+		DirectX::XMFLOAT4 color;
+
+		DirectX::XMFLOAT4 angle;
+		DirectX::XMFLOAT2 angleratio;
+		DirectX::XMFLOAT2 C_att;
+		DirectX::XMFLOAT2 L_att;
+		DirectX::XMFLOAT2 Q_att;
+
+		DirectX::XMINT2 type;
+		DirectX::XMINT2 enabled;
+		DirectX::XMINT4 padding;
+	};
+
+	struct LightProp
+	{
+		DirectX::XMFLOAT4 CameraPos;
+		Lights LightArray[LIGHT_AMOUNT];
 	};
 
 	struct VertexPosition

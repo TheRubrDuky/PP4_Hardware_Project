@@ -2,12 +2,12 @@ f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardw
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\vc141.pdb
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\vc141.idb
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\pch.obj
-f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\dx11uwamain.obj
-f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\ddstextureloader.obj
-f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\sample3dscenerenderer.obj
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\app.obj
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\ddstextureloader.obj
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\deviceresources.obj
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\dx11uwamain.obj
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\samplefpstextrenderer.obj
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\sample3dscenerenderer.obj
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\x64\debug\dx11uwa\pixelshader.cso
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\x64\debug\dx11uwa\samplepixelshader.cso
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\x64\debug\dx11uwa\samplevertexshader.cso
@@ -32,8 +32,8 @@ f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardw
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\projectarchitectures.txt
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\x64\debug\dx11uwa\appxmanifest.xml
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\x64\debug\dx11uwa\dx11uwa.build.appxrecipe
-f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\x64\debug\dx11uwa\dx11uwa.ilk
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\x64\debug\dx11uwa\dx11uwa.exe
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\x64\debug\dx11uwa\dx11uwa.ilk
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\x64\debug\dx11uwa\dx11uwa.pdb
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\dx11uwa.tlog\cl.command.1.tlog
 f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\x64\debug\dx11uwa.tlog\cl.read.1.tlog

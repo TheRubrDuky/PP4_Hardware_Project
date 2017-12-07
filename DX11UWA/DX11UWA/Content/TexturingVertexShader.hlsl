@@ -39,7 +39,11 @@ PixelShaderInput main(VertexShaderInput input)
 
 	// Pass the color through without modification.
 	output.uv = input.uv;
-	output.norm = input.norm;
+
+	float3 normWS = input.norm;
+
+	normWS = mul(normWS, model);
+	output.norm = normWS;
 
 	return output;
 }

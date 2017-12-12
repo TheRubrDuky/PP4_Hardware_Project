@@ -41,13 +41,33 @@ namespace DX11UWA
 		float NearPlane = 0.01f;
 		float FarPlane = 100.0f;
 
-		ID3D11Texture2D* MossTexture = nullptr;
-		ID3D11ShaderResourceView* Moss_SRV = nullptr;
+		float m_time;
 
 		ID3D11SamplerState* WrapState = nullptr;
 
+		ID3D11Texture2D* MossTexture = nullptr;
+		ID3D11ShaderResourceView* Moss_SRV = nullptr;
+
+		ID3D11Texture2D* MossNormTexture = nullptr;
+		ID3D11ShaderResourceView* MossNorm_SRV = nullptr;
+
 		ID3D11Texture2D* ConcreteTexture = nullptr;
 		ID3D11ShaderResourceView* Concrete_SRV = nullptr;
+
+		ID3D11Texture2D* RockTexture = nullptr;
+		ID3D11Texture2D* RockNormalTexture = nullptr;
+
+		ID3D11ShaderResourceView* Rock_SRV = nullptr;
+		ID3D11ShaderResourceView* RockNormal_SRV = nullptr;
+
+		ID3D11Texture2D* PebbleTexture = nullptr;
+		ID3D11ShaderResourceView* Pebble_SRV = nullptr;
+
+		ID3D11Texture2D* PebbleNormTexture = nullptr;
+		ID3D11ShaderResourceView* PebbleNorm_SRV = nullptr;
+
+		ID3D11Texture2D* SkyboxTexture = nullptr;
+		ID3D11ShaderResourceView* SkyboxTexture_SRV = nullptr;
 
 		Lights DirLight;
 		Lights SpotLight;
@@ -130,6 +150,8 @@ namespace DX11UWA
 
 		// Variables used with the rendering loop.
 		bool	m_loadingComplete;
+		bool	loadingcomplete;
+		bool	tloadingcomplete;
 		float	m_degreesPerSecond;
 		bool	m_tracking;
 

@@ -53,4 +53,12 @@ namespace DX11UWA
 		DirectX::XMFLOAT3 uv;
 		DirectX::XMFLOAT3 normal;
 	};
+
+	struct VertexPositionUVNormalTan
+	{
+		DirectX::XMFLOAT3 pos;
+		DirectX::XMFLOAT3 uv;
+		DirectX::XMFLOAT3 normal;
+		DirectX::XMFLOAT3 tangent;
+	};
 }

@@ -6,15 +6,15 @@ mtllib TP.mtl
 
 
 #
-#  Mesh Mesh
+#  Mesh Mesh Mesh
 #
-g  Mesh Mesh
+g  Mesh Mesh Mesh
 
 
 #
-#  Mesh Mesh_ Mesh__lambert2
+#  Mesh Mesh Mesh_ Mesh Mesh_ Mesh__lambert2
 #
-usemtl  Mesh Mesh_ Mesh__lambert2
+usemtl  Mesh Mesh Mesh_ Mesh Mesh_ Mesh__lambert2
 
 v -0.500000 -0.353553 -0.500000
 v 0.500000 -0.353553 -0.500000

@@ -30,25 +30,17 @@
     <AppXManifest Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-12-07T22:28:52.431</Modified>
+      <Modified>2017-12-12T23:04:02.638</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.exe">
       <PackagePath>DX11UWA.exe</PackagePath>
-      <Modified>2017-12-07T22:37:05.891</Modified>
+      <Modified>2017-12-12T23:19:31.250</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.winmd">
       <PackagePath>DX11UWA.winmd</PackagePath>
-      <Modified>2017-12-07T22:28:51.498</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\156_WM.dds">
-      <PackagePath>Assets\156_WM.dds</PackagePath>
-      <Modified>2017-12-05T21:34:45.910</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\169_WithMips.dds">
-      <PackagePath>Assets\169_WithMips.dds</PackagePath>
-      <Modified>2017-12-05T20:27:20.590</Modified>
+      <Modified>2017-12-12T22:25:11.931</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -84,9 +76,57 @@
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
       <Modified>2017-11-30T18:12:47.998</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\156_norm.dds">
+      <PackagePath>Assets\156_norm.dds</PackagePath>
+      <Modified>2017-12-12T16:32:21.786</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\156_WM.dds">
+      <PackagePath>Assets\156_WM.dds</PackagePath>
+      <Modified>2017-12-05T21:34:45.910</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\169_WithMips.dds">
+      <PackagePath>Assets\169_WithMips.dds</PackagePath>
+      <Modified>2017-12-05T20:27:20.590</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\182.dds">
+      <PackagePath>Assets\182.dds</PackagePath>
+      <Modified>2017-12-09T22:59:55.458</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\182_norm.dds">
+      <PackagePath>Assets\182_norm.dds</PackagePath>
+      <Modified>2017-12-09T23:00:20.429</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\188.dds">
+      <PackagePath>Assets\188.dds</PackagePath>
+      <Modified>2017-12-12T22:20:30.125</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\188_norm.dds">
+      <PackagePath>Assets\188_norm.dds</PackagePath>
+      <Modified>2017-12-12T22:20:43.243</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\Castle_Medium.dds">
+      <PackagePath>Assets\Castle_Medium.dds</PackagePath>
+      <Modified>2017-12-12T22:53:24.638</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\CastleNorm.dds">
+      <PackagePath>Assets\CastleNorm.dds</PackagePath>
+      <Modified>2017-12-12T23:01:59.077</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\OutputCube.dds">
+      <PackagePath>Assets\OutputCube.dds</PackagePath>
+      <Modified>2017-12-12T21:45:23.175</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\OutputCube1.dds">
+      <PackagePath>Assets\OutputCube1.dds</PackagePath>
+      <Modified>2017-12-12T21:46:30.958</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\SunsetSkybox.dds">
+      <PackagePath>Assets\SunsetSkybox.dds</PackagePath>
+      <Modified>2013-01-03T21:19:54.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\TP.obj">
       <PackagePath>Assets\TP.obj</PackagePath>
-      <Modified>2017-11-30T18:12:47.993</Modified>
+      <Modified>2017-12-12T17:14:22.034</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\Tower1.obj">
       <PackagePath>Assets\Tower1.obj</PackagePath>
@@ -96,29 +136,41 @@
       <PackagePath>Assets\spyro1.obj</PackagePath>
       <Modified>2017-12-04T21:15:16.097</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\Hyrule_Castle1.obj">
+      <PackagePath>Assets\Hyrule_Castle1.obj</PackagePath>
+      <Modified>2017-12-12T22:52:48.048</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\NormalTexturingPixelShader.cso">
+      <PackagePath>NormalTexturingPixelShader.cso</PackagePath>
+      <Modified>2017-12-12T22:25:01.960</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\NormalTexturingVertexShader.cso">
+      <PackagePath>NormalTexturingVertexShader.cso</PackagePath>
+      <Modified>2017-12-12T22:25:02.100</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\PixelShader.cso">
       <PackagePath>PixelShader.cso</PackagePath>
-      <Modified>2017-12-07T22:28:42.506</Modified>
+      <Modified>2017-12-12T22:25:02.232</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\SamplePixelShader.cso">
       <PackagePath>SamplePixelShader.cso</PackagePath>
-      <Modified>2017-12-07T22:28:42.636</Modified>
+      <Modified>2017-12-12T22:25:02.367</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\SampleVertexShader.cso">
       <PackagePath>SampleVertexShader.cso</PackagePath>
-      <Modified>2017-12-07T22:28:42.754</Modified>
+      <Modified>2017-12-12T22:25:02.503</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\TexturingPixelShader.cso">
       <PackagePath>TexturingPixelShader.cso</PackagePath>
-      <Modified>2017-12-07T22:53:31.192</Modified>
+      <Modified>2017-12-12T22:25:02.678</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\TexturingVertexShader.cso">
       <PackagePath>TexturingVertexShader.cso</PackagePath>
-      <Modified>2017-12-07T22:28:43.053</Modified>
+      <Modified>2017-12-12T22:25:02.795</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\VertexShader.cso">
       <PackagePath>VertexShader.cso</PackagePath>
-      <Modified>2017-12-07T22:28:43.169</Modified>
+      <Modified>2017-12-12T22:25:02.924</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\Windows Kits\10\ExtensionSDKs\Microsoft.UniversalCRT.Debug\10.0.15063.0\\redist\Debug\X64\ucrtbased.dll">
       <PackagePath>ucrtbased.dll</PackagePath>
@@ -127,7 +179,7 @@
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\resources.pri">
       <PackagePath>resources.pri</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2017-12-07T22:28:52.368</Modified>
+      <Modified>2017-12-12T23:04:02.572</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

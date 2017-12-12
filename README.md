@@ -12,9 +12,13 @@ D - Move Camera Right
 X - Move Camera Down
 Spacebar - Move Camera Up
 
-1 - Toggle Directional Light
-2 - Toggle Point Light
-3 - Toggle Spot Light
+1 - Turn on Directional Light
+2 - Turn on Point Light
+3 - Turn on Spot Light
+
+4 - Turn off Directional Light
+5 - Turn off Point Light
+6 - Turn off Spot Light
 
 C - Reset Zoom Level
 V - Zoom Out

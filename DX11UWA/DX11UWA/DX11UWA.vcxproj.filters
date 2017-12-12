@@ -110,10 +110,25 @@
     <Image Include="Assets\StoreLogo.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="Assets\169_WithMips.dds">
+    <Image Include="Assets\OutputCube.dds">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="Assets\156_WM.dds">
+    <Image Include="Assets\OutputCube1.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SunsetSkybox.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\188.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\188_norm.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Castle_Medium.dds">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\CastleNorm.dds">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
@@ -129,6 +144,21 @@
       <Filter>Assets</Filter>
     </None>
     <None Include="Assets\spyro1.obj">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\182.dds">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\182_norm.dds">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\156_norm.dds">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\156_WM.dds">
+      <Filter>Assets</Filter>
+    </None>
+    <None Include="Assets\169_WithMips.dds">
       <Filter>Assets</Filter>
     </None>
   </ItemGroup>
@@ -151,5 +181,16 @@
     <FxCompile Include="Content\VertexShader.hlsl">
       <Filter>Content\Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Content\NormalTexturingPixelShader.hlsl">
+      <Filter>Content\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Content\NormalTexturingVertexShader.hlsl">
+      <Filter>Content\Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Assets\Hyrule_Castle1.obj">
+      <Filter>Assets</Filter>
+    </Object>
   </ItemGroup>
 </Project>

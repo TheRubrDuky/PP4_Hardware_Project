@@ -1,8 +1,7 @@
-﻿F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Content\TexturingPixelShader.hlsl(50,27-64): warning X3206: 'dot': implicit truncation of vector type
-F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Content\TexturingPixelShader.hlsl(59,9-50): warning X3206: implicit truncation of vector type
-F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Content\TexturingPixelShader.hlsl(74,9-50): warning X3206: implicit truncation of vector type
-F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Content\TexturingPixelShader.hlsl(76,29-66): warning X3206: 'dot': implicit truncation of vector type
-F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Content\TexturingPixelShader.hlsl(133,17-61): warning X3206: 'Sample': implicit truncation of vector type
-  
-  compilation object save succeeded; see F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\TexturingPixelShader.cso
+﻿  Sample3DSceneRenderer.cpp
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\content\objmodelloader.h(158): warning C4267: 'argument': conversion from 'size_t' to 'std::_Vbase', possible loss of data
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\content\sample3dscenerenderer.cpp(805): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\content\sample3dscenerenderer.cpp(822): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\content\sample3dscenerenderer.cpp(931): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+f:\school stuff\full sail classes\month 16\graphics 2\hardware project\pp4_hardware_project\dx11uwa\dx11uwa\content\sample3dscenerenderer.cpp(942): warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
   DX11UWA.vcxproj -> F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\x64\Debug\DX11UWA\DX11UWA.exe

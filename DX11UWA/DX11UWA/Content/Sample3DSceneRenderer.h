@@ -45,30 +45,25 @@ namespace DX11UWA
 
 		ID3D11SamplerState* WrapState = nullptr;
 
-		ID3D11Texture2D* MossTexture = nullptr;
-		ID3D11ShaderResourceView* Moss_SRV = nullptr;
+		//Ground Texture
+		ID3D11Texture2D* GroundTexture = nullptr;
+		ID3D11Texture2D* GroundNormalTexture = nullptr;
 
-		ID3D11Texture2D* MossNormTexture = nullptr;
-		ID3D11ShaderResourceView* MossNorm_SRV = nullptr;
+		ID3D11ShaderResourceView* Ground_SRV = nullptr;
+		ID3D11ShaderResourceView* GroundNormal_SRV = nullptr;
 
-		ID3D11Texture2D* ConcreteTexture = nullptr;
-		ID3D11ShaderResourceView* Concrete_SRV = nullptr;
+		//Barn A Texture
+		ID3D11Texture2D* BarnATexture = nullptr;
+		ID3D11Texture2D* BarnANormalTexture = nullptr;
 
-		ID3D11Texture2D* RockTexture = nullptr;
-		ID3D11Texture2D* RockNormalTexture = nullptr;
+		ID3D11ShaderResourceView* BarnA_SRV = nullptr;
+		ID3D11ShaderResourceView* BarnANormal_SRV = nullptr;
 
-		ID3D11ShaderResourceView* Rock_SRV = nullptr;
-		ID3D11ShaderResourceView* RockNormal_SRV = nullptr;
-
-		ID3D11Texture2D* PebbleTexture = nullptr;
-		ID3D11ShaderResourceView* Pebble_SRV = nullptr;
-
-		ID3D11Texture2D* PebbleNormTexture = nullptr;
-		ID3D11ShaderResourceView* PebbleNorm_SRV = nullptr;
-
+		//SkyBox Texture
 		ID3D11Texture2D* SkyboxTexture = nullptr;
 		ID3D11ShaderResourceView* SkyboxTexture_SRV = nullptr;
 
+		//Lights
 		Lights DirLight;
 		Lights SpotLight;
 		Lights PointLight;
@@ -93,13 +88,6 @@ namespace DX11UWA
 		ModelViewProjectionConstantBuffer	m_constantBufferData;
 		uint32	m_indexCount;
 
-		// Direct3D resources for Pyramid geometry.
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		p_vertexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		p_indexBuffer;
-
-		// System resources for Pyramid geometry.
-		uint32	p_indexCount;
-
 		// Direct3D resources for Model geometry.
 		Microsoft::WRL::ComPtr<ID3D11InputLayout>	Model_inputLayout;
 		Microsoft::WRL::ComPtr<ID3D11Buffer>		Model_vertexBuffer;
@@ -113,40 +101,18 @@ namespace DX11UWA
 		ObjectData FirstModel;
 		bool Loaded;
 
-		// Direct3D resources for Obj2Header Pyramid geometry.
-		Microsoft::WRL::ComPtr<ID3D11InputLayout>	O2H_inputLayout;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		O2H_vertexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		O2H_indexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11VertexShader>	O2H_vertexShader;
-		Microsoft::WRL::ComPtr<ID3D11PixelShader>	O2H_pixelShader;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		O2H_constantBuffer;
+		// Direct3D resources for Model geometry.
+		Microsoft::WRL::ComPtr<ID3D11InputLayout>	BarnAModel_inputLayout;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		BarnAModel_vertexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		BarnAModel_indexBuffer;
+		Microsoft::WRL::ComPtr<ID3D11VertexShader>	BarnAModel_vertexShader;
+		Microsoft::WRL::ComPtr<ID3D11PixelShader>	BarnAModel_pixelShader;
+		Microsoft::WRL::ComPtr<ID3D11Buffer>		BarnAModel_constantBuffer;
 
-		// System resources for Obj2Header Pyramid geometry.
-		uint32	O2H_indexCount;
-
-		// Direct3D resources for Obj2Header Pyramid geometry.
-		Microsoft::WRL::ComPtr<ID3D11InputLayout>	Grid_inputLayout;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		Grid_vertexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		Grid_indexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11VertexShader>	Grid_vertexShader;
-		Microsoft::WRL::ComPtr<ID3D11PixelShader>	Grid_pixelShader;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		Grid_constantBuffer;
-
-		// System resources for Obj2Header Pyramid geometry.
-		uint32	Grid_indexCount;
-
-		// Direct3D resources for Spyro Model geometry.
-		Microsoft::WRL::ComPtr<ID3D11InputLayout>	SModel_inputLayout;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		SModel_vertexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		SModel_indexBuffer;
-		Microsoft::WRL::ComPtr<ID3D11VertexShader>	SModel_vertexShader;
-		Microsoft::WRL::ComPtr<ID3D11PixelShader>	SModel_pixelShader;
-		Microsoft::WRL::ComPtr<ID3D11Buffer>		SModel_constantBuffer;
-
-		// System resources for Spyro Model geometry.
-		uint32	SModel_indexCount;
-		ObjectData SpyroModel;
-		bool SpyroLoaded;
+		// System resources for Model geometry.
+		uint32	BarnAModel_indexCount;
+		ObjectData BarnAModel;
+		bool BarnALoaded;
 
 		// Variables used with the rendering loop.
 		bool	m_loadingComplete;

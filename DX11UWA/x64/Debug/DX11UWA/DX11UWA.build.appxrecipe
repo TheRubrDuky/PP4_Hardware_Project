@@ -58,50 +58,23 @@
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\156_norm.dds">
-      <PackagePath>Assets\156_norm.dds</PackagePath>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\farm_base_tex01.dds">
+      <PackagePath>Assets\farm_base_tex01.dds</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\156_WM.dds">
-      <PackagePath>Assets\156_WM.dds</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\169_WithMips.dds">
-      <PackagePath>Assets\169_WithMips.dds</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\182.dds">
-      <PackagePath>Assets\182.dds</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\182_norm.dds">
-      <PackagePath>Assets\182_norm.dds</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\188.dds">
-      <PackagePath>Assets\188.dds</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\188_norm.dds">
-      <PackagePath>Assets\188_norm.dds</PackagePath>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\farm_base_tex01_NRM1.dds">
+      <PackagePath>Assets\farm_base_tex01_NRM1.dds</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\Castle_Medium.dds">
       <PackagePath>Assets\Castle_Medium.dds</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\CastleNorm.dds">
-      <PackagePath>Assets\CastleNorm.dds</PackagePath>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\Castle_Medium_NRM.dds">
+      <PackagePath>Assets\Castle_Medium_NRM.dds</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\OutputCube.dds">
-      <PackagePath>Assets\OutputCube.dds</PackagePath>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\OutputCube2.dds">
+      <PackagePath>Assets\OutputCube2.dds</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\OutputCube1.dds">
-      <PackagePath>Assets\OutputCube1.dds</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\SunsetSkybox.dds">
-      <PackagePath>Assets\SunsetSkybox.dds</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\TP.obj">
-      <PackagePath>Assets\TP.obj</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\Tower1.obj">
-      <PackagePath>Assets\Tower1.obj</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\spyro1.obj">
-      <PackagePath>Assets\spyro1.obj</PackagePath>
+    <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\DigiFarm.obj">
+      <PackagePath>Assets\DigiFarm.obj</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="F:\School Stuff\Full Sail Classes\Month 16\Graphics 2\Hardware Project\PP4_Hardware_Project\DX11UWA\DX11UWA\Assets\Hyrule_Castle1.obj">
       <PackagePath>Assets\Hyrule_Castle1.obj</PackagePath>

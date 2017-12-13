@@ -110,25 +110,19 @@
     <Image Include="Assets\StoreLogo.png">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="Assets\OutputCube.dds">
+    <Image Include="Assets\farm_base_tex01.dds">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="Assets\OutputCube1.dds">
+    <Image Include="Assets\farm_base_tex01_NRM1.dds">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="Assets\SunsetSkybox.dds">
-      <Filter>Assets</Filter>
-    </Image>
-    <Image Include="Assets\188.dds">
-      <Filter>Assets</Filter>
-    </Image>
-    <Image Include="Assets\188_norm.dds">
+    <Image Include="Assets\OutputCube2.dds">
       <Filter>Assets</Filter>
     </Image>
     <Image Include="Assets\Castle_Medium.dds">
       <Filter>Assets</Filter>
     </Image>
-    <Image Include="Assets\CastleNorm.dds">
+    <Image Include="Assets\Castle_Medium_NRM.dds">
       <Filter>Assets</Filter>
     </Image>
   </ItemGroup>
@@ -137,30 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DX11UWA_TemporaryKey.pfx" />
-    <None Include="Assets\TP.obj">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\Tower1.obj">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\spyro1.obj">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\182.dds">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\182_norm.dds">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\156_norm.dds">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\156_WM.dds">
-      <Filter>Assets</Filter>
-    </None>
-    <None Include="Assets\169_WithMips.dds">
-      <Filter>Assets</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Content\PixelShader.hlsl">
@@ -189,6 +159,9 @@
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
+    <Object Include="Assets\DigiFarm.obj">
+      <Filter>Assets</Filter>
+    </Object>
     <Object Include="Assets\Hyrule_Castle1.obj">
       <Filter>Assets</Filter>
     </Object>

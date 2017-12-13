@@ -77,7 +77,7 @@ void Sample3DSceneRenderer::Update(DX::StepTimer const& timer)
 
 
 	// Update or move camera here
-	UpdateCamera(timer, 2.0f, 0.75f);
+	UpdateCamera(timer, 10.0f, 0.75f);
 
 }
 
@@ -494,7 +494,7 @@ void Sample3DSceneRenderer::Render(void)
 
 	auto context = m_deviceResources->GetD3DDeviceContext();
 
-	ID3D11ShaderResourceView* TextureArray[] = { Moss_SRV, MossNorm_SRV, Concrete_SRV, Rock_SRV, RockNormal_SRV, SkyboxTexture_SRV, Pebble_SRV, PebbleNorm_SRV };
+	ID3D11ShaderResourceView* TextureArray[] = { Ground_SRV, GroundNormal_SRV, SkyboxTexture_SRV};
 	
 	D3D11_SAMPLER_DESC Sample1;
 	ZeroMemory(&Sample1, sizeof(D3D11_SAMPLER_DESC));
@@ -563,40 +563,13 @@ void Sample3DSceneRenderer::Render(void)
 
 	context->ClearDepthStencilView(m_deviceResources->GetDepthStencilView(), D3D11_CLEAR_DEPTH, 1.0f, NULL);
 
-	/////////////////////////////////////////////////////
-	//Spyro Model
-	ID3D11ShaderResourceView* SpyroTextureArray[] = { Concrete_SRV };
-
-	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixMultiply(XMMatrixRotationY(XMConvertToRadians(180)), XMMatrixMultiply(XMMatrixScaling(0.01f, 0.01f, 0.01f), XMMatrixTranslation(0.0f, 0.0f, 3.0f)))));
-
-	context->UpdateSubresource1(SModel_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
-
-	UINT SM_stride = sizeof(VertexPositionUVNormal);
-	UINT SM_offset = 0;
-
-	context->IASetVertexBuffers(0, 1, SModel_vertexBuffer.GetAddressOf(), &SM_stride, &SM_offset);
-
-	context->IASetIndexBuffer(SModel_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	context->IASetInputLayout(SModel_inputLayout.Get());
-
-	context->VSSetShader(SModel_vertexShader.Get(), nullptr, 0);
-	context->VSSetConstantBuffers1(0, 1, SModel_constantBuffer.GetAddressOf(), nullptr, nullptr);
-
-	context->PSSetShader(SModel_pixelShader.Get(), nullptr, 0);
-	context->PSSetShaderResources(0, 1, SpyroTextureArray);
-	context->PSSetSamplers(0, 1, &SampleStates[0]);
-
 	context->PSSetConstantBuffers(1, 1, Lights_constantBuffer.GetAddressOf());
 
-	context->DrawIndexed(SModel_indexCount, 0, 0);
-
 	////////////////////////////////////////////////////////////
-	////Model
-	ID3D11ShaderResourceView* ModelTextureArray[] = { Rock_SRV, RockNormal_SRV };
+	////Ground Model
+	ID3D11ShaderResourceView* ModelTextureArray[] = { Ground_SRV, GroundNormal_SRV };
 
-	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixMultiply(XMMatrixRotationZ(XMConvertToRadians(0)), XMMatrixMultiply(XMMatrixScaling(1.0f, 1.0f, 1.0f), XMMatrixTranslation(15.0f, 0.0f, 0.0f)))));
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixMultiply(XMMatrixRotationY(XMConvertToRadians(90)), XMMatrixMultiply(XMMatrixScaling(100.0f, 100.0f, 100.0f), XMMatrixTranslation(0.0f, 0.0f, 0.0f)))));
 
 	context->UpdateSubresource1(Model_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
 
@@ -618,57 +591,31 @@ void Sample3DSceneRenderer::Render(void)
 
 	context->DrawIndexed(Model_indexCount, 0, 0);
 
-	///////////////////////////////////////////////////////
-	// Obj 2 Header Pyramid Translated 5 to the Left
-	ID3D11ShaderResourceView* O2HTextureArray[] = { Concrete_SRV };
+	////////////////////////////////////////////////////
+	//BarnA Model
+	ID3D11ShaderResourceView* BarnAModelTextureArray[] = { BarnA_SRV, BarnANormal_SRV };
 
-	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(-5.0f, 0.5f, 0.0f)));
+	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixMultiply(XMMatrixRotationY(XMConvertToRadians(90)), XMMatrixMultiply(XMMatrixScaling(1.0f, 1.0f, 1.0f), XMMatrixTranslation(0.0f, 0.0f, 0.0f)))));
 
-	context->UpdateSubresource1(O2H_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
+	context->UpdateSubresource1(BarnAModel_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
 
-	UINT M2_stride = sizeof(VertexPositionUVNormal);
-	UINT M2_offset = 0;
+	UINT BarnAM_stride = sizeof(VertexPositionUVNormalTan);
+	UINT BarnAM_offset = 0;
 
-	context->IASetVertexBuffers(0, 1, O2H_vertexBuffer.GetAddressOf(), &M2_stride, &M2_offset);
+	context->IASetVertexBuffers(0, 1, BarnAModel_vertexBuffer.GetAddressOf(), &BarnAM_stride, &BarnAM_offset);
 
-	context->IASetIndexBuffer(O2H_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
+	context->IASetIndexBuffer(BarnAModel_indexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	context->IASetInputLayout(O2H_inputLayout.Get());
-	context->VSSetShader(O2H_vertexShader.Get(), nullptr, 0);
-	context->VSSetConstantBuffers1(0, 1, O2H_constantBuffer.GetAddressOf(), nullptr, nullptr);
+	context->IASetInputLayout(BarnAModel_inputLayout.Get());
+	context->VSSetShader(BarnAModel_vertexShader.Get(), nullptr, 0);
+	context->VSSetConstantBuffers1(0, 1, BarnAModel_constantBuffer.GetAddressOf(), nullptr, nullptr);
 
-	context->PSSetShader(O2H_pixelShader.Get(), nullptr, 0);
-	context->PSSetShaderResources(0, 1, O2HTextureArray);
+	context->PSSetShader(BarnAModel_pixelShader.Get(), nullptr, 0);
+	context->PSSetShaderResources(0, 2, BarnAModelTextureArray);
 	context->PSSetSamplers(0, 1, &SampleStates[0]);
 
-	context->DrawIndexed(O2H_indexCount, 0, 0);
-
-	/////////////////////////////////////////////////////
-	//Grid
-	ID3D11ShaderResourceView* GridTextureArray[] = { Pebble_SRV, PebbleNorm_SRV };
-
-	XMStoreFloat4x4(&m_constantBufferData.model, XMMatrixTranspose(XMMatrixTranslation(-50.0f, -0.10f, 50.0f)));
-
-	context->UpdateSubresource1(Grid_constantBuffer.Get(), 0, NULL, &m_constantBufferData, 0, 0, 0);
-
-	UINT M3_stride = sizeof(VertexPositionUVNormalTan);
-	UINT M3_offset = 0;
-
-	context->IASetVertexBuffers(0, 1, Grid_vertexBuffer.GetAddressOf(), &M3_stride, &M3_offset);
-
-	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	context->IASetInputLayout(Grid_inputLayout.Get());
-
-	context->VSSetShader(Grid_vertexShader.Get(), nullptr, 0);
-	context->VSSetConstantBuffers1(0, 1, Grid_constantBuffer.GetAddressOf(), nullptr, nullptr);
-
-	context->PSSetShader(Grid_pixelShader.Get(), nullptr, 0);
-	context->PSSetShaderResources(0, 2, GridTextureArray);
-	context->PSSetSamplers(0, 1, &SampleStates[0]);
-
-	context->Draw(Grid_indexCount, 0);
+	context->DrawIndexed(BarnAModel_indexCount, 0, 0);
 }
 
 void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
@@ -705,8 +652,6 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 		// After the vertex shader file is loaded, create the shader and input layout.
 		auto createnewVSTask = loadnewVSTask.then([this](const std::vector<byte>& fileData)
 		{
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateVertexShader(&fileData[0], fileData.size(), nullptr, &O2H_vertexShader));
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateVertexShader(&fileData[0], fileData.size(), nullptr, &SModel_vertexShader));
 
 			static const D3D11_INPUT_ELEMENT_DESC newvertexDesc[] =
 			{
@@ -715,130 +660,26 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 				{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_PER_VERTEX_DATA, 0 },
 			};
 
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateInputLayout(newvertexDesc, ARRAYSIZE(newvertexDesc), &fileData[0], fileData.size(), &O2H_inputLayout));
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateInputLayout(newvertexDesc, ARRAYSIZE(newvertexDesc), &fileData[0], fileData.size(), &SModel_inputLayout));
-
 		});
 
 		// After the pixel shader file is loaded, create the shader and constant buffer.
 		auto createnewPSTask = loadnewPSTask.then([this](const std::vector<byte>& fileData)
 		{
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreatePixelShader(&fileData[0], fileData.size(), nullptr, &O2H_pixelShader));
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreatePixelShader(&fileData[0], fileData.size(), nullptr, &SModel_pixelShader));
-
-
-			CD3D11_BUFFER_DESC newconstantBufferDesc(sizeof(ModelViewProjectionConstantBuffer), D3D11_BIND_CONSTANT_BUFFER);
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &O2H_constantBuffer));
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &SModel_constantBuffer));
-
 			CD3D11_BUFFER_DESC LightsconstantBufferDesc(sizeof(LightProp), D3D11_BIND_CONSTANT_BUFFER);
 			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&LightsconstantBufferDesc, nullptr, &Lights_constantBuffer));
 
 		});
 
-		HRESULT result = CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/OutputCube1.dds", (ID3D11Resource**)&SkyboxTexture, &SkyboxTexture_SRV);
+		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/OutputCube2.dds", (ID3D11Resource**)&SkyboxTexture, &SkyboxTexture_SRV);
 
-		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/156_WM.dds", (ID3D11Resource**)&MossTexture, &Moss_SRV);
-		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/156_norm.dds", (ID3D11Resource**)&MossNormTexture, &MossNorm_SRV);
+		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/Castle_Medium.dds", (ID3D11Resource**)&BarnATexture, &BarnA_SRV);
+		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/Castle_Medium_NRM.dds", (ID3D11Resource**)&BarnANormalTexture, &BarnANormal_SRV);
 
-		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/169_WithMips.dds", (ID3D11Resource**)&ConcreteTexture, &Concrete_SRV);
-
-		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/Castle_Medium.dds", (ID3D11Resource**)&RockTexture, &Rock_SRV);
-		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/CastleNorm.dds", (ID3D11Resource**)&RockNormalTexture, &RockNormal_SRV);
-
-		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/188.dds", (ID3D11Resource**)&PebbleTexture, &Pebble_SRV);
-		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/188_norm.dds", (ID3D11Resource**)&PebbleNormTexture, &PebbleNorm_SRV);
+		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/farm_base_tex01.dds", (ID3D11Resource**)&GroundTexture, &Ground_SRV);
+		CreateDDSTextureFromFile(m_deviceResources->GetD3DDevice(), L"Assets/farm_base_tex01_NRM1.dds", (ID3D11Resource**)&GroundNormalTexture, &GroundNormal_SRV);
 
 		auto createtheTask = (createnewVSTask && createnewPSTask).then([this]()
 		{
-#pragma region Object-2-Header Pyramid
-			VertexPositionUVNormal O2HVertices[768];
-
-			for (unsigned int i = 0; i < 768; i++)
-			{
-				O2HVertices[i].pos.x = test_pyramid_data[i].pos[0];
-				O2HVertices[i].pos.y = test_pyramid_data[i].pos[1];
-				O2HVertices[i].pos.z = test_pyramid_data[i].pos[2];
-
-				O2HVertices[i].uv.x = test_pyramid_data[i].uvw[0];
-				O2HVertices[i].uv.y = test_pyramid_data[i].uvw[1];
-				O2HVertices[i].uv.z = test_pyramid_data[i].uvw[2];
-
-
-				O2HVertices[i].normal.x = test_pyramid_data[i].nrm[0];
-				O2HVertices[i].normal.y = test_pyramid_data[i].nrm[1];
-				O2HVertices[i].normal.z = test_pyramid_data[i].nrm[2];
-			}
-
-			D3D11_SUBRESOURCE_DATA O2HvertexBufferData = { 0 };
-			O2HvertexBufferData.pSysMem = O2HVertices;
-			O2HvertexBufferData.SysMemPitch = 0;
-			O2HvertexBufferData.SysMemSlicePitch = 0;
-			CD3D11_BUFFER_DESC O2HvertexBufferDesc(sizeof(O2HVertices), D3D11_BIND_VERTEX_BUFFER);
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&O2HvertexBufferDesc, &O2HvertexBufferData, &O2H_vertexBuffer));
-
-			unsigned short O2HIndices[1674];
-
-			for (unsigned int i = 0; i < 1674; i++)
-			{
-				O2HIndices[i] = 0;
-
-				O2HIndices[i] = (unsigned short)(test_pyramid_indicies[i]);
-			}
-
-			O2H_indexCount = ARRAYSIZE(O2HIndices);
-
-			D3D11_SUBRESOURCE_DATA O2HindexBufferData = { 0 };
-			O2HindexBufferData.pSysMem = O2HIndices;
-			O2HindexBufferData.SysMemPitch = 0;
-			O2HindexBufferData.SysMemSlicePitch = 0;
-			CD3D11_BUFFER_DESC O2HindexBufferDesc(sizeof(O2HIndices), D3D11_BIND_INDEX_BUFFER);
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&O2HindexBufferDesc, &O2HindexBufferData, &O2H_indexBuffer));
-#pragma endregion
-
-#pragma region Spyro Model
-
-			SpyroLoaded = LoadOBJFile("Assets/spyro1.obj", &SpyroModel);
-
-			if (SpyroLoaded)
-			{
-				unsigned int SModelSize = SpyroModel.MeshVerts.size();
-				VertexPositionUVNormal* SModelVertices = new VertexPositionUVNormal[SModelSize];
-
-				for (unsigned int i = 0; i < SModelSize; i++)
-				{
-					SModelVertices[i].pos = SpyroModel.MeshVerts[i].Position;
-					SModelVertices[i].uv = SpyroModel.MeshVerts[i].UVW;
-					SModelVertices[i].normal = SpyroModel.MeshVerts[i].Normals;
-				}
-
-				D3D11_SUBRESOURCE_DATA SModelvertexBufferData = { 0 };
-				SModelvertexBufferData.pSysMem = SModelVertices;
-				SModelvertexBufferData.SysMemPitch = 0;
-				SModelvertexBufferData.SysMemSlicePitch = 0;
-				CD3D11_BUFFER_DESC SModelvertexBufferDesc(sizeof(VertexPositionUVNormal) * SModelSize, D3D11_BIND_VERTEX_BUFFER);
-				DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&SModelvertexBufferDesc, &SModelvertexBufferData, &SModel_vertexBuffer));
-
-				unsigned int SModelIndicesSize = SpyroModel.MeshIndecies.size();
-				unsigned short* SModelIndices = new unsigned short[SModelIndicesSize];
-
-				for (unsigned int i = 0; i < SModelIndicesSize; i++)
-				{
-					SModelIndices[i] = SpyroModel.MeshIndecies[i];
-				}
-
-				SModel_indexCount = SModelIndicesSize;
-
-				D3D11_SUBRESOURCE_DATA SModelindexBufferData = { 0 };
-				SModelindexBufferData.pSysMem = SModelIndices;
-				SModelindexBufferData.SysMemPitch = 0;
-				SModelindexBufferData.SysMemSlicePitch = 0;
-				CD3D11_BUFFER_DESC SModelindexBufferDesc(sizeof(unsigned short) * SModelIndicesSize, D3D11_BIND_INDEX_BUFFER);
-				DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&SModelindexBufferDesc, &SModelindexBufferData, &SModel_indexBuffer));
-
-			}
-
-#pragma endregion
 
 #pragma region Lights
 			DirLight.enabled = { 0, 0 };
@@ -854,7 +695,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 			DirLight.padding = { 0, 0, 0, 0 };
 
 			PointLight.enabled = { 0, 0 };
-			PointLight.pos = { 0.0f, 2.0f, 0.0f, 1.0f };
+			PointLight.pos = { 0.0f, 1.0f, 0.0f, 1.0f };
 			PointLight.direction = { -5.0f, 5.0f, 0.0f, 0.0f };
 			PointLight.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 			PointLight.angle = { 0.0f, 0.0f, 0.0f, 0.0f };
@@ -866,7 +707,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 			PointLight.padding = { 0, 0, 0, 0 };
 
 			SpotLight.enabled = { 0, 0 };
-			SpotLight.pos = { 0.0f, 10.0f, 0.0f, 1.0f };
+			SpotLight.pos = { -3.0f, 10.0f, 0.0f, 1.0f };
 			SpotLight.direction = { 0.0f, 0.0f, 0.0f, 0.0f };
 			SpotLight.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 			SpotLight.angle = { 0.0f, -2.0f, 1.0f, 0.0f };
@@ -891,8 +732,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 		auto cVSTask = VSTask.then([this](const std::vector<byte>& fileData)
 		{
 			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateVertexShader(&fileData[0], fileData.size(), nullptr, &Model_vertexShader));
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateVertexShader(&fileData[0], fileData.size(), nullptr, &Grid_vertexShader));
-
+			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateVertexShader(&fileData[0], fileData.size(), nullptr, &BarnAModel_vertexShader));
 
 			static const D3D11_INPUT_ELEMENT_DESC vertDesc[] =
 			{
@@ -903,7 +743,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 			};
 
 			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateInputLayout(vertDesc, ARRAYSIZE(vertDesc), &fileData[0], fileData.size(), &Model_inputLayout));
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateInputLayout(vertDesc, ARRAYSIZE(vertDesc), &fileData[0], fileData.size(), &Grid_inputLayout));
+			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateInputLayout(vertDesc, ARRAYSIZE(vertDesc), &fileData[0], fileData.size(), &BarnAModel_inputLayout));
 
 		});
 
@@ -911,20 +751,19 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 		auto cPSTask = PSTask.then([this](const std::vector<byte>& fileData)
 		{
 			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreatePixelShader(&fileData[0], fileData.size(), nullptr, &Model_pixelShader));
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreatePixelShader(&fileData[0], fileData.size(), nullptr, &Grid_pixelShader));
-
+			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreatePixelShader(&fileData[0], fileData.size(), nullptr, &BarnAModel_pixelShader));
 
 			CD3D11_BUFFER_DESC newconstantBufferDesc(sizeof(ModelViewProjectionConstantBuffer), D3D11_BIND_CONSTANT_BUFFER);
 			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &Model_constantBuffer));
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &Grid_constantBuffer));
+			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&newconstantBufferDesc, nullptr, &BarnAModel_constantBuffer));
 
 		});
 
 		auto createTask = (cVSTask && cPSTask).then([this]()
 		{
 
-#pragma region Model
-			Loaded = LoadOBJFile("Assets/Hyrule_Castle1.obj", &FirstModel);
+#pragma region Models
+			Loaded = LoadOBJFile("Assets/DigiFarm.obj", &FirstModel);
 
 			if (Loaded)
 			{
@@ -962,9 +801,6 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 					float t2 = ModelVertices[ModelIndices[i + 2]].uv.y - ModelVertices[ModelIndices[i]].uv.y;
 
 					float r = 1.0f / ((s1 * t2) - (s2 * t1));
-
-					//XMFLOAT3 Sdir = { (((t2 * x1) - (s2 * x2)) * r), (((t2 * y1) - (s2 * y2)) * r), (((t2 * z1) - (s2 * z2)) * r) };
-					//XMFLOAT3 Tdir = { (((s1 * x2) - (t1 * x1)) * r), (((s1 * y2) - (t1 * y1)) * r), (((s1 * z2) - (t1 * z1)) * r) };
 
 					XMFLOAT3 Sdir = { (((t2 * x1) - (t1 * x2)) * r), (((t2 * y1) - (t1 * y2)) * r), (((t2 * z1) - (t1 * z2)) * r) };
 					XMFLOAT3 Tdir = { (((s1 * x2) - (s2 * x1)) * r), (((s1 * y2) - (s2 * y1)) * r), (((s1 * z2) - (s2 * z1)) * r) };
@@ -1004,79 +840,43 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 				CD3D11_BUFFER_DESC ModelindexBufferDesc(sizeof(unsigned short) * ModelIndicesSize, D3D11_BIND_INDEX_BUFFER);
 				DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&ModelindexBufferDesc, &ModelindexBufferData, &Model_indexBuffer));
 			}
-#pragma endregion
 
-#pragma region Grid
+			BarnALoaded = LoadOBJFile("Assets/Hyrule_Castle1.obj", &BarnAModel);
 
-			VertexPositionUVNormalTan GridVertices[600];
-			unsigned int gridverts = 0;
-			for (unsigned int z = 0; z < 10; z++)
+			if (BarnALoaded)
 			{
-				for (unsigned int x = 0; x < 10; x++)
+				unsigned int ModelSize = BarnAModel.MeshVerts.size();
+				VertexPositionUVNormalTan* ModelVertices = new VertexPositionUVNormalTan[ModelSize];
+
+				for (unsigned int i = 0; i < ModelSize; i++)
 				{
-					GridVertices[gridverts].pos.x = 0.0f + ((float)x * 10.0f);
-					GridVertices[gridverts].pos.y = 0.0f;
-					GridVertices[gridverts].pos.z = (0.0f + ((float)z * -10.0f));
+					ModelVertices[i].pos = BarnAModel.MeshVerts[i].Position;
+					ModelVertices[i].uv = BarnAModel.MeshVerts[i].UVW;
+					ModelVertices[i].normal = BarnAModel.MeshVerts[i].Normals;
+					ModelVertices[i].tangent = { 0.0f, 0.0f, 0.0f };
+				}
 
-					GridVertices[gridverts].uv.x = 0.0f;
-					GridVertices[gridverts].uv.y = 0.0f;
-					GridVertices[gridverts].uv.z = 0.0f;
+				unsigned int ModelIndicesSize = BarnAModel.MeshIndecies.size();
+				unsigned short* ModelIndices = new unsigned short[ModelIndicesSize];
 
-					GridVertices[gridverts].normal.x = 0.0f;
-					GridVertices[gridverts].normal.y = 1.0f;
-					GridVertices[gridverts].normal.z = 0.0f;
+				for (unsigned int i = 0; i < ModelIndicesSize; i++)
+				{
+					ModelIndices[i] = BarnAModel.MeshIndecies[i];
+				}
 
-					GridVertices[gridverts].tangent.x = 0.0f;
-					GridVertices[gridverts].tangent.y = 0.0f;
-					GridVertices[gridverts].tangent.z = 0.0f;
+				for (unsigned int i = 0; i < ModelIndicesSize; i += 3)
+				{
+					float x1 = ModelVertices[ModelIndices[i + 1]].pos.x - ModelVertices[ModelIndices[i]].pos.x;
+					float x2 = ModelVertices[ModelIndices[i + 2]].pos.x - ModelVertices[ModelIndices[i]].pos.x;
+					float y1 = ModelVertices[ModelIndices[i + 1]].pos.y - ModelVertices[ModelIndices[i]].pos.y;
+					float y2 = ModelVertices[ModelIndices[i + 2]].pos.y - ModelVertices[ModelIndices[i]].pos.y;
+					float z1 = ModelVertices[ModelIndices[i + 1]].pos.z - ModelVertices[ModelIndices[i]].pos.z;
+					float z2 = ModelVertices[ModelIndices[i + 2]].pos.z - ModelVertices[ModelIndices[i]].pos.z;
 
-					++gridverts;
-
-					GridVertices[gridverts].pos.x = 10.0f + ((float)x* 10.0f);
-					GridVertices[gridverts].pos.y = 0.0f;
-					GridVertices[gridverts].pos.z = (-10.0f + ((float)z * -10.0f));
-
-					GridVertices[gridverts].uv.x = 1.0f;
-					GridVertices[gridverts].uv.y = 1.0f;
-					GridVertices[gridverts].uv.z = 0.0f;
-
-					GridVertices[gridverts].normal.x = 0.0f;
-					GridVertices[gridverts].normal.y = 1.0f;
-					GridVertices[gridverts].normal.z = 0.0f;
-
-					GridVertices[gridverts].tangent.x = 0.0f;
-					GridVertices[gridverts].tangent.y = 0.0f;
-					GridVertices[gridverts].tangent.z = 0.0f;
-
-					++gridverts;
-
-					GridVertices[gridverts].pos.x = 0.0f + ((float)x * 10.0f);
-					GridVertices[gridverts].pos.y = 0.0f;
-					GridVertices[gridverts].pos.z = (-10.0f + ((float)z * -10.0f));
-
-					GridVertices[gridverts].uv.x = 0.0f;
-					GridVertices[gridverts].uv.y = 1.0f;
-					GridVertices[gridverts].uv.z = 0.0f;
-
-					GridVertices[gridverts].normal.x = 0.0f;
-					GridVertices[gridverts].normal.y = 1.0f;
-					GridVertices[gridverts].normal.z = 0.0f;
-
-					GridVertices[gridverts].tangent.x = 0.0f;
-					GridVertices[gridverts].tangent.y = 0.0f;
-					GridVertices[gridverts].tangent.z = 0.0f;
-
-					float x1 = GridVertices[gridverts - 1].pos.x - GridVertices[gridverts - 2].pos.x;
-					float x2 = GridVertices[gridverts].pos.x - GridVertices[gridverts - 2].pos.x;
-					float y1 = GridVertices[gridverts - 1].pos.y - GridVertices[gridverts - 2].pos.y;
-					float y2 = GridVertices[gridverts].pos.y - GridVertices[gridverts - 2].pos.y;
-					float z1 = GridVertices[gridverts - 1].pos.z - GridVertices[gridverts - 2].pos.z;
-					float z2 = GridVertices[gridverts].pos.z - GridVertices[gridverts - 2].pos.z;
-
-					float s1 = GridVertices[gridverts - 1].uv.x - GridVertices[gridverts - 2].uv.x;
-					float s2 = GridVertices[gridverts].uv.x - GridVertices[gridverts - 2].uv.x;
-					float t1 = GridVertices[gridverts - 1].uv.y - GridVertices[gridverts - 2].uv.y;
-					float t2 = GridVertices[gridverts].uv.y - GridVertices[gridverts - 2].uv.y;
+					float s1 = ModelVertices[ModelIndices[i + 1]].uv.x - ModelVertices[ModelIndices[i]].uv.x;
+					float s2 = ModelVertices[ModelIndices[i + 2]].uv.x - ModelVertices[ModelIndices[i]].uv.x;
+					float t1 = ModelVertices[ModelIndices[i + 1]].uv.y - ModelVertices[ModelIndices[i]].uv.y;
+					float t2 = ModelVertices[ModelIndices[i + 2]].uv.y - ModelVertices[ModelIndices[i]].uv.y;
 
 					float r = 1.0f / ((s1 * t2) - (s2 * t1));
 
@@ -1085,123 +885,41 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 
 					XMVECTOR S = XMLoadFloat3(&Sdir);
 					XMVECTOR T = XMLoadFloat3(&Tdir);
-					XMVECTOR N1 = XMLoadFloat3(&GridVertices[gridverts - 2].normal);
-					XMVECTOR N2 = XMLoadFloat3(&GridVertices[gridverts - 1].normal);
-					XMVECTOR N3 = XMLoadFloat3(&GridVertices[gridverts].normal);
+					XMVECTOR N1 = XMLoadFloat3(&ModelVertices[ModelIndices[i]].normal);
+					XMVECTOR N2 = XMLoadFloat3(&ModelVertices[ModelIndices[i + 1]].normal);
+					XMVECTOR N3 = XMLoadFloat3(&ModelVertices[ModelIndices[i + 2]].normal);
 
-					XMVECTOR Tangent1 = XMLoadFloat3(&GridVertices[gridverts - 2].tangent);
-					XMVECTOR Tangent2 = XMLoadFloat3(&GridVertices[gridverts - 1].tangent);
-					XMVECTOR Tangent3 = XMLoadFloat3(&GridVertices[gridverts].tangent);
+					XMVECTOR Tangent1 = XMLoadFloat3(&ModelVertices[ModelIndices[i]].tangent);
+					XMVECTOR Tangent2 = XMLoadFloat3(&ModelVertices[ModelIndices[i + 1]].tangent);
+					XMVECTOR Tangent3 = XMLoadFloat3(&ModelVertices[ModelIndices[i + 2]].tangent);
 
 					XMVECTOR Tan1 = XMVector3Cross(S, N1) + Tangent1;
 					XMVECTOR Tan2 = XMVector3Cross(S, N2) + Tangent2;
 					XMVECTOR Tan3 = XMVector3Cross(S, N3) + Tangent3;
 
-					XMStoreFloat3(&GridVertices[gridverts - 2].tangent, Tan1);
-					XMStoreFloat3(&GridVertices[gridverts - 1].tangent, Tan2);
-					XMStoreFloat3(&GridVertices[gridverts].tangent, Tan3);
-
-					++gridverts;
-
-					GridVertices[gridverts].pos.x = 0.0f + ((float)x * 10.0f);
-					GridVertices[gridverts].pos.y = 0.0f;
-					GridVertices[gridverts].pos.z = (0.0f + ((float)z * -10.0f));
-
-					GridVertices[gridverts].uv.x = 0.0f;
-					GridVertices[gridverts].uv.y = 0.0f;
-					GridVertices[gridverts].uv.z = 0.0f;
-
-					GridVertices[gridverts].normal.x = 0.0f;
-					GridVertices[gridverts].normal.y = 1.0f;
-					GridVertices[gridverts].normal.z = 0.0f;
-
-					GridVertices[gridverts].tangent.x = 0.0f;
-					GridVertices[gridverts].tangent.y = 0.0f;
-					GridVertices[gridverts].tangent.z = 0.0f;
-
-					++gridverts;
-
-					GridVertices[gridverts].pos.x = 10.0f + ((float)x * 10.0f);
-					GridVertices[gridverts].pos.y = 0.0f;
-					GridVertices[gridverts].pos.z = (0.0f + ((float)z * -10.0f));
-
-					GridVertices[gridverts].uv.x = 1.0f;
-					GridVertices[gridverts].uv.y = 0.0f;
-					GridVertices[gridverts].uv.z = 0.0f;
-
-					GridVertices[gridverts].normal.x = 0.0f;
-					GridVertices[gridverts].normal.y = 1.0f;
-					GridVertices[gridverts].normal.z = 0.0f;
-
-					GridVertices[gridverts].tangent.x = 0.0f;
-					GridVertices[gridverts].tangent.y = 0.0f;
-					GridVertices[gridverts].tangent.z = 0.0f;
-
-					++gridverts;
-
-					GridVertices[gridverts].pos.x = 10.0f + ((float)x * 10.0f);
-					GridVertices[gridverts].pos.y = 0.0f;
-					GridVertices[gridverts].pos.z = (-10.0f + ((float)z * -10.0f));
-
-					GridVertices[gridverts].uv.x = 1.0f;
-					GridVertices[gridverts].uv.y = 1.0f;
-					GridVertices[gridverts].uv.z = 0.0f;
-
-					GridVertices[gridverts].normal.x = 0.0f;
-					GridVertices[gridverts].normal.y = 1.0f;
-					GridVertices[gridverts].normal.z = 0.0f;
-
-					GridVertices[gridverts].tangent.x = 0.0f;
-					GridVertices[gridverts].tangent.y = 0.0f;
-					GridVertices[gridverts].tangent.z = 0.0f;
-
-					x1 = GridVertices[gridverts - 1].pos.x - GridVertices[gridverts - 2].pos.x;
-					x2 = GridVertices[gridverts].pos.x - GridVertices[gridverts - 2].pos.x;
-					y1 = GridVertices[gridverts - 1].pos.y - GridVertices[gridverts - 2].pos.y;
-					y2 = GridVertices[gridverts].pos.y - GridVertices[gridverts - 2].pos.y;
-					z1 = GridVertices[gridverts - 1].pos.z - GridVertices[gridverts - 2].pos.z;
-					z2 = GridVertices[gridverts].pos.z - GridVertices[gridverts - 2].pos.z;
-
-					s1 = GridVertices[gridverts - 1].uv.x - GridVertices[gridverts - 2].uv.x;
-					s2 = GridVertices[gridverts].uv.x - GridVertices[gridverts - 2].uv.x;
-					t1 = GridVertices[gridverts - 1].uv.y - GridVertices[gridverts - 2].uv.y;
-					t2 = GridVertices[gridverts].uv.y - GridVertices[gridverts - 2].uv.y;
-
-					r = 1.0f / ((s1 * t2) - (s2 * t1));
-
-					Sdir = { (((t2 * x1) - (t1 * x2)) * r), (((t2 * y1) - (t1 * y2)) * r), (((t2 * z1) - (t1 * z2)) * r) };
-					Tdir = { (((s1 * x2) - (s2 * x1)) * r), (((s1 * y2) - (s2 * y1)) * r), (((s1 * z2) - (s2 * z1)) * r) };
-
-					S = XMLoadFloat3(&Sdir);
-					T = XMLoadFloat3(&Tdir);
-					N1 = XMLoadFloat3(&GridVertices[gridverts - 2].normal);
-					N2 = XMLoadFloat3(&GridVertices[gridverts - 1].normal);
-					N3 = XMLoadFloat3(&GridVertices[gridverts].normal);
-
-					Tangent1 = XMLoadFloat3(&GridVertices[gridverts - 2].tangent);
-					Tangent2 = XMLoadFloat3(&GridVertices[gridverts - 1].tangent);
-					Tangent3 = XMLoadFloat3(&GridVertices[gridverts].tangent);
-
-					Tan1 = XMVector3Cross(S, N1) + Tangent1;
-					Tan2 = XMVector3Cross(S, N2) + Tangent2;
-					Tan3 = XMVector3Cross(S, N3) + Tangent3;
-
-					XMStoreFloat3(&GridVertices[gridverts - 2].tangent, Tan1);
-					XMStoreFloat3(&GridVertices[gridverts - 1].tangent, Tan2);
-					XMStoreFloat3(&GridVertices[gridverts].tangent, Tan3);
-
-					++gridverts;
+					XMStoreFloat3(&ModelVertices[ModelIndices[i]].tangent, Tan1);
+					XMStoreFloat3(&ModelVertices[ModelIndices[i + 1]].tangent, Tan2);
+					XMStoreFloat3(&ModelVertices[ModelIndices[i + 2]].tangent, Tan3);
 				}
+
+				D3D11_SUBRESOURCE_DATA ModelvertexBufferData = { 0 };
+				ModelvertexBufferData.pSysMem = ModelVertices;
+				ModelvertexBufferData.SysMemPitch = 0;
+				ModelvertexBufferData.SysMemSlicePitch = 0;
+				CD3D11_BUFFER_DESC ModelvertexBufferDesc(sizeof(VertexPositionUVNormalTan) * ModelSize, D3D11_BIND_VERTEX_BUFFER);
+				DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&ModelvertexBufferDesc, &ModelvertexBufferData, &BarnAModel_vertexBuffer));
+
+				BarnAModel_indexCount = ModelIndicesSize;
+
+				D3D11_SUBRESOURCE_DATA ModelindexBufferData = { 0 };
+				ModelindexBufferData.pSysMem = ModelIndices;
+				ModelindexBufferData.SysMemPitch = 0;
+				ModelindexBufferData.SysMemSlicePitch = 0;
+				CD3D11_BUFFER_DESC ModelindexBufferDesc(sizeof(unsigned short) * ModelIndicesSize, D3D11_BIND_INDEX_BUFFER);
+				DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&ModelindexBufferDesc, &ModelindexBufferData, &BarnAModel_indexBuffer));
 			}
 
-			Grid_indexCount = gridverts;
 
-			D3D11_SUBRESOURCE_DATA GridvertexBufferData = { 0 };
-			GridvertexBufferData.pSysMem = GridVertices;
-			GridvertexBufferData.SysMemPitch = 0;
-			GridvertexBufferData.SysMemSlicePitch = 0;
-			CD3D11_BUFFER_DESC GridvertexBufferDesc(sizeof(GridVertices), D3D11_BIND_VERTEX_BUFFER);
-			DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&GridvertexBufferDesc, &GridvertexBufferData, &Grid_vertexBuffer));
 #pragma endregion
 		});
 	});
@@ -1210,7 +928,7 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 	// Once both shaders are loaded, create the mesh.
 	auto createCubeTask = (createPSTask && createVSTask).then([this]()
 	{
-#pragma region Starter Cube
+#pragma region Skybox
 		// Load mesh vertices. Each vertex has a position and a color.
 		static const VertexPositionColor cubeVertices[] =
 		{
@@ -1267,46 +985,6 @@ void Sample3DSceneRenderer::CreateDeviceDependentResources(void)
 		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&indexBufferDesc, &indexBufferData, &m_indexBuffer));
 #pragma endregion
 
-#pragma region Pyramid
-		static const VertexPositionColor PyramidVertices[] =
-		{
-			{ XMFLOAT3(0.0f, 0.5f, 0.0f), XMFLOAT3(0.0f, 0.0f, 0.0f) },
-			{ XMFLOAT3(-0.5f, -0.5f,  -0.5f), XMFLOAT3(0.0f, 0.0f, 1.0f) },
-			{ XMFLOAT3(-0.5f,  -0.5f, 0.5f), XMFLOAT3(0.0f, 1.0f, 0.0f) },
-			{ XMFLOAT3(0.5f,  -0.5f,  -0.5f), XMFLOAT3(0.0f, 1.0f, 1.0f) },
-			{ XMFLOAT3(0.5f, -0.5f, 0.5f), XMFLOAT3(1.0f, 0.0f, 0.0f) },
-		};
-
-		D3D11_SUBRESOURCE_DATA pvertexBufferData = { 0 };
-		pvertexBufferData.pSysMem = PyramidVertices;
-		pvertexBufferData.SysMemPitch = 0;
-		pvertexBufferData.SysMemSlicePitch = 0;
-		CD3D11_BUFFER_DESC pvertexBufferDesc(sizeof(PyramidVertices), D3D11_BIND_VERTEX_BUFFER);
-		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&pvertexBufferDesc, &pvertexBufferData, &p_vertexBuffer));
-
-		static const unsigned short PyramidIndices[] =
-		{
-			0,1,2,
-			0,3,1,
-
-			0,4,3,
-			0,2,4,
-
-			1,4,2,
-			1,3,4,
-		};
-
-		p_indexCount = ARRAYSIZE(PyramidIndices);
-
-		D3D11_SUBRESOURCE_DATA pindexBufferData = { 0 };
-		pindexBufferData.pSysMem = PyramidIndices;
-		pindexBufferData.SysMemPitch = 0;
-		pindexBufferData.SysMemSlicePitch = 0;
-		CD3D11_BUFFER_DESC pindexBufferDesc(sizeof(PyramidIndices), D3D11_BIND_INDEX_BUFFER);
-		DX::ThrowIfFailed(m_deviceResources->GetD3DDevice()->CreateBuffer(&pindexBufferDesc, &pindexBufferData, &p_indexBuffer));
-#pragma endregion
-
-		
 	});
 
 	createCubeTask.then([this]()
@@ -1322,15 +1000,13 @@ void Sample3DSceneRenderer::ReleaseDeviceDependentResources(void)
 	m_loadingComplete = false;
 	loadingcomplete = false;
 	tloadingcomplete = false;
+
 	m_vertexShader.Reset();
 	m_inputLayout.Reset();
 	m_pixelShader.Reset();
 	m_constantBuffer.Reset();
 	m_vertexBuffer.Reset();
 	m_indexBuffer.Reset();
-
-	p_indexBuffer.Reset();
-	p_vertexBuffer.Reset();
 
 	Model_inputLayout.Reset();
 	Model_vertexBuffer.Reset();
@@ -1339,38 +1015,28 @@ void Sample3DSceneRenderer::ReleaseDeviceDependentResources(void)
 	Model_pixelShader.Reset();
 	Model_constantBuffer.Reset();
 
-	O2H_inputLayout.Reset();
-	O2H_vertexBuffer.Reset();
-	O2H_indexBuffer.Reset();
-	O2H_vertexShader.Reset();
-	O2H_pixelShader.Reset();
-	O2H_constantBuffer.Reset();
-
-	SModel_inputLayout.Reset();
-	SModel_vertexBuffer.Reset();
-	SModel_indexBuffer.Reset();
-	SModel_vertexShader.Reset();
-	SModel_pixelShader.Reset();
-	SModel_constantBuffer.Reset();
+	BarnAModel_inputLayout.Reset();
+	BarnAModel_vertexBuffer.Reset();
+	BarnAModel_indexBuffer.Reset();
+	BarnAModel_vertexShader.Reset();
+	BarnAModel_pixelShader.Reset();
+	BarnAModel_constantBuffer.Reset();
 
 	Lights_constantBuffer.Reset();
 
-	MossTexture->Release();
-	Moss_SRV->Release();
-
-	MossNormTexture->Release();
-	MossNorm_SRV->Release();
-
 	WrapState->Release();
 
-	ConcreteTexture->Release();
-	Concrete_SRV->Release();
+	GroundTexture->Release();
+	Ground_SRV->Release();
 
-	RockTexture->Release();
-	Rock_SRV->Release();
+	GroundNormalTexture->Release();
+	GroundNormal_SRV->Release();
 
-	RockNormalTexture->Release();
-	RockNormal_SRV->Release();
+	BarnATexture->Release();
+	BarnANormalTexture->Release();
+
+	BarnA_SRV->Release();
+	BarnANormal_SRV->Release();
 
 	SkyboxTexture->Release();
 	SkyboxTexture_SRV->Release();
